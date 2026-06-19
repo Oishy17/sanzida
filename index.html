@@ -1,0 +1,2854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sanzida Afrin | Biomedical Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /* ===== RESET & BASE ===== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f4f8;
+            color: #1a1a2e;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            position: relative;
+            display: inline-block;
+            color: #0a1628;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #4fc3f7, #0288d1);
+            border-radius: 4px;
+        }
+        .section-title-center {
+            text-align: center;
+            display: block;
+        }
+        .section-title-center::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .section-subtitle {
+            color: #2a3a4e;
+            font-size: 1.05rem;
+            max-width: 640px;
+            margin: 0 auto 40px;
+            text-align: center;
+            font-weight: 500;
+        }
+        .section-padding {
+            padding: 80px 0;
+            position: relative;
+            z-index: 2;
+        }
+        .bg-white {
+            background: rgba(255, 255, 255, 0.50);
+            backdrop-filter: blur(15%);
+            -webkit-backdrop-filter: blur(20%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .bg-light {
+            background: rgba(240, 244, 248, 0.50);
+            backdrop-filter: blur(30%);
+            -webkit-backdrop-filter: blur(20%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3a5f, #0a1628);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(30, 58, 95, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(30, 58, 95, 0.4);
+        }
+        .btn-outline {
+            background: transparent;
+            color: #1e3a5f;
+            border: 2px solid #1e3a5f;
+        }
+        .btn-outline:hover {
+            background: #1e3a5f;
+            color: #fff;
+            transform: translateY(-3px);
+        }
+        .btn-sm {
+            padding: 8px 20px;
+            font-size: 0.85rem;
+        }
+
+        /* ===== CANVAS BACKGROUND ===== */
+        #bme-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            background: linear-gradient(165deg, #eef4fa 0%, #dce8f4 40%, #e4edf7 100%);
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 22, 40, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 14px 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+        .logo span {
+            color: #4fc3f7;
+        }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        .nav-links a:hover {
+            color: #fff;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4fc3f7;
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .hamburger span {
+            width: 26px;
+            height: 2.5px;
+            background: #fff;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: #0a1628;
+            line-height: 1.15;
+            margin-bottom: 8px;
+        }
+        .hero-content h1 .highlight {
+            background: linear-gradient(135deg, #0288d1, #4fc3f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-content .tagline {
+            font-size: 1.2rem;
+            color: #2a3a4e;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        .hero-content .bio-short {
+            color: #2a3a4e;
+            font-size: 1rem;
+            max-width: 480px;
+            margin-bottom: 28px;
+            line-height: 1.7;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .hero-buttons .btn-outline-light {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(4px);
+            color: #0a1628;
+            border: 2px solid rgba(10, 22, 40, 0.15);
+        }
+        .hero-buttons .btn-outline-light:hover {
+            background: rgba(10, 22, 40, 0.08);
+            border-color: #0a1628;
+            transform: translateY(-3px);
+        }
+        .hero-social {
+            display: flex;
+            gap: 18px;
+            margin-top: 24px;
+        }
+        .hero-social a {
+            color: #2a3a4e;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+        .hero-social a:hover {
+            color: #0288d1;
+            transform: translateY(-3px);
+        }
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-avatar {
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+            border: 4px solid rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+            position: relative;
+            cursor: default;
+        }
+        .hero-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hero-avatar::after {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 2px solid rgba(2, 136, 209, 0.06);
+            animation: pulse-border 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes pulse-border {
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+        }
+
+        /* ===== THESIS CARD ===== */
+        .thesis-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .thesis-card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(5%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+        .thesis-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.4);
+        }
+        .thesis-card.expanded {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .thesis-img {
+            height: 260px;
+            background: rgba(220, 232, 244, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        .thesis-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .thesis-img:hover img {
+            transform: scale(1.02);
+        }
+        .thesis-img .click-hint {
+            position: absolute;
+            bottom: 12px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(6px);
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 5px 16px;
+            border-radius: 50px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .thesis-img .click-hint i {
+            font-size: 0.65rem;
+        }
+        .thesis-body {
+            padding: 32px 40px 20px;
+        }
+        .thesis-body h3 {
+            font-size: 1.5rem;
+            color: #0a1628;
+            margin-bottom: 12px;
+        }
+        .thesis-body ul {
+            list-style: disc;
+            padding-left: 24px;
+            margin: 12px 0 16px;
+            color: #1a2a3a;
+        }
+        .thesis-body ul li {
+            margin-bottom: 6px;
+        }
+        .thesis-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .thesis-tools span {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 4px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #1e3a5f;
+        }
+        .thesis-body .expand-toggle {
+            display: inline-block;
+            margin-top: 16px;
+            color: #0288d1;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+        .thesis-body .expand-toggle i {
+            transition: transform 0.3s ease;
+            margin-left: 4px;
+        }
+        .thesis-card.expanded .expand-toggle i {
+            transform: rotate(180deg);
+        }
+        .thesis-expand {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, padding 0.4s ease;
+            opacity: 0;
+            padding: 0 40px 0 40px;
+        }
+        .thesis-card.expanded .thesis-expand {
+            max-height: 2500px;
+            opacity: 1;
+            padding: 0 40px 40px 40px;
+        }
+        .thesis-expand-inner {
+            border-top: 1px solid rgba(30, 58, 95, 0.08);
+            padding-top: 24px;
+        }
+        .thesis-expand-inner .detail-text {
+            color: #1a2a3a;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        .thesis-expand-inner .detail-text strong {
+            color: #0a1628;
+        }
+        .thesis-expand-inner .detail-text ul {
+            list-style: disc;
+            padding-left: 24px;
+            margin: 8px 0;
+        }
+        .thesis-expand-inner .detail-text ul li {
+            margin-bottom: 4px;
+        }
+
+        /* ===== PROJECT CARDS ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 30px;
+        }
+        .project-card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            position: relative;
+        }
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .project-card.expanded {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
+            background: rgba(255, 255, 255, 0.15);
+            grid-column: 1 / -1;
+            max-width: 100%;
+        }
+        .project-img {
+            height: 200px;
+            background: rgba(220, 232, 244, 0.5);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+            pointer-events: none;
+        }
+        .project-img:hover img {
+            transform: scale(1.03);
+        }
+        .project-img .click-hint {
+            position: absolute;
+            bottom: 12px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(6px);
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 5px 16px;
+            border-radius: 50px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .project-img .click-hint i {
+            font-size: 0.65rem;
+        }
+        .project-body {
+            padding: 24px 28px 20px;
+        }
+        .project-body h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0a1628;
+            margin-bottom: 4px;
+        }
+        .project-body .project-brief {
+            color: #1a2a3a;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .project-body .tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .project-body .tools span {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 2px 14px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #1e3a5f;
+        }
+        .project-body .expand-toggle {
+            display: inline-block;
+            margin-top: 12px;
+            color: #0288d1;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+        .project-body .expand-toggle i {
+            transition: transform 0.3s ease;
+            margin-left: 4px;
+        }
+        .project-card.expanded .expand-toggle i {
+            transform: rotate(180deg);
+        }
+        .project-expand {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, padding 0.4s ease;
+            opacity: 0;
+            padding: 0 28px 0 28px;
+        }
+        .project-card.expanded .project-expand {
+            max-height: 2000px;
+            opacity: 1;
+            padding: 0 28px 28px 28px;
+        }
+        .project-expand-inner {
+            border-top: 1px solid rgba(30, 58, 95, 0.08);
+            padding-top: 20px;
+        }
+        .project-expand-inner .detail-text {
+            color: #1a2a3a;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        .project-expand-inner .detail-text strong {
+            color: #0a1628;
+        }
+        .project-expand-inner .detail-text ul {
+            list-style: disc;
+            padding-left: 24px;
+            margin: 8px 0;
+        }
+        .project-expand-inner .detail-text ul li {
+            margin-bottom: 4px;
+        }
+
+        /* ===== EXPANDED IMAGES GRID ===== */
+        .expanded-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+        .expanded-images .img-item {
+            border-radius: 12px;
+            overflow: hidden;
+            background: rgba(220, 232, 244, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .expanded-images .img-item:hover {
+            transform: scale(1.02);
+        }
+        .expanded-images .img-item img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            /* pointer-events: none; removed to allow click on image */
+        }
+        .expanded-images .img-item .caption {
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: #2a3a4e;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.5);
+            text-align: center;
+            pointer-events: none;
+        }
+
+        /* ===== OTHER SECTIONS ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+        .about-text p {
+            color: #1a2a3a;
+            margin-bottom: 16px;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+        .about-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 30px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+            padding: 28px 32px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .about-info-item .label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #0288d1;
+        }
+        .about-info-item .value {
+            font-weight: 600;
+            color: #0a1628;
+            font-size: 0.95rem;
+        }
+        .education-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .edu-item {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+            padding: 28px 32px;
+            border-radius: 16px;
+            border-left: 5px solid #0288d1;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .edu-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+        }
+        .edu-item .degree {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0a1628;
+        }
+        .edu-item .institution {
+            color: #1e3a5f;
+            font-weight: 500;
+        }
+        .edu-item .meta {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+            font-size: 0.9rem;
+            color: #2a3a4e;
+        }
+        .edu-item .meta span i {
+            margin-right: 6px;
+            color: #0288d1;
+        }
+        .interests-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .interest-tag {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #1e3a5f;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .interest-tag:hover {
+            background: #1e3a5f;
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(30, 58, 95, 0.15);
+            border-color: #1e3a5f;
+        }
+        .web-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .web-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .web-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
+            background: rgba(255, 255, 255, 0.6);
+        }
+        .web-card .web-img {
+            height: 140px;
+            background: rgba(220, 232, 244, 0.5);
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+        }
+        .web-card .web-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+            pointer-events: none;
+        }
+        .web-card:hover .web-img img {
+            transform: scale(1.05);
+        }
+        .web-card .web-body {
+            padding: 16px 20px 20px;
+        }
+        .web-card .web-body h5 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0a1628;
+            margin-bottom: 4px;
+        }
+        .web-card .web-body p {
+            color: #1a2a3a;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .web-card .web-body a {
+            color: #0288d1;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        .web-card .web-body a:hover {
+            color: #01579b;
+        }
+        .web-card .web-img .click-hint {
+            position: absolute;
+            bottom: 8px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            font-size: 0.6rem;
+            padding: 3px 12px;
+            border-radius: 50px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .web-card .web-img .click-hint i {
+            font-size: 0.6rem;
+        }
+        .skills-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .skill-category {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+            padding: 28px 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .skill-category h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0a1628;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .skill-category h4 i {
+            color: #0288d1;
+        }
+        .skill-tags span {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 4px 16px;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: #1e3a5f;
+        }
+        .exp-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .exp-item {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+            padding: 24px 30px;
+            border-radius: 16px;
+            border-left: 4px solid #0288d1;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .exp-item .exp-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #0a1628;
+        }
+        .exp-item .exp-org {
+            font-weight: 500;
+            color: #1e3a5f;
+        }
+        .exp-item .exp-date {
+            font-size: 0.85rem;
+            color: #2a3a4e;
+            margin-bottom: 4px;
+        }
+        .exp-item .exp-desc {
+            color: #1a2a3a;
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .lead-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+            padding: 28px 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .lead-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.6);
+        }
+        .lead-card h5 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0a1628;
+        }
+        .lead-card .lead-org {
+            color: #1e3a5f;
+            font-weight: 500;
+            font-size: 0.92rem;
+        }
+        .lead-card .lead-year {
+            color: #2a3a4e;
+            font-size: 0.85rem;
+        }
+        .lead-card p {
+            color: #1a2a3a;
+            font-size: 0.9rem;
+            margin-top: 8px;
+            line-height: 1.6;
+        }
+        .awards-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .award-item {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+            padding: 18px 24px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .award-item:hover {
+            transform: translateX(4px);
+            background: rgba(255, 255, 255, 0.6);
+        }
+        .award-item .award-icon {
+            color: #0288d1;
+            font-size: 1.4rem;
+            width: 40px;
+            text-align: center;
+        }
+        .award-item .award-text strong {
+            color: #0a1628;
+            font-weight: 600;
+        }
+        .award-item .award-text .award-detail {
+            color: #2a3a4e;
+            font-size: 0.85rem;
+        }
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+            padding: 16px 24px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .contact-item:hover {
+            transform: translateX(4px);
+            background: rgba(255, 255, 255, 0.6);
+        }
+        .contact-item .ci-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e3a5f;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .contact-item .ci-text {
+            font-size: 0.92rem;
+            color: #1a1a2e;
+        }
+        .contact-item .ci-text .label {
+            font-weight: 600;
+            color: #0a1628;
+        }
+        .contact-item a {
+            color: #1e3a5f;
+            transition: color 0.3s ease;
+        }
+        .contact-item a:hover {
+            color: #0288d1;
+        }
+        .contact-social a {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #1e3a5f;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .contact-social a:hover {
+            background: #1e3a5f;
+            color: #fff;
+            transform: translateY(-4px);
+        }
+        .ref-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+            padding: 20px 24px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .ref-card .ref-name {
+            font-weight: 700;
+            color: #0a1628;
+        }
+        .ref-card .ref-title {
+            color: #1e3a5f;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .ref-card .ref-org {
+            color: #2a3a4e;
+            font-size: 0.85rem;
+        }
+        .ref-card .ref-email {
+            font-size: 0.85rem;
+            color: #0288d1;
+        }
+        footer {
+            background: rgba(10, 22, 40, 0.7);
+            backdrop-filter: blur(12px);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            position: relative;
+            z-index: 2;
+        }
+        footer .footer-social a {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+        footer .footer-social a:hover {
+            color: #4fc3f7;
+        }
+        footer p span {
+            color: #4fc3f7;
+        }
+
+        /* ===== FULL-SCREEN IMAGE MODAL ===== */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(8, 12, 28, 0.94);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            justify-content: center;
+            align-items: center;
+            animation: modalFadeIn 0.35s ease;
+            padding: 40px;
+        }
+        .image-modal.active {
+            display: flex;
+        }
+        @keyframes modalFadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .image-modal .modal-content {
+            max-width: 92vw;
+            max-height: 88vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            animation: modalZoom 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            user-select: none;
+            -webkit-user-drag: none;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 4px;
+        }
+        @keyframes modalZoom {
+            0% {
+                opacity: 0;
+                transform: scale(0.85);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .image-modal .modal-close {
+            position: fixed;
+            top: 28px;
+            right: 32px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 2.6rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            line-height: 1;
+            z-index: 10;
+        }
+        .image-modal .modal-close:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.12);
+            transform: rotate(90deg);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        .image-modal .modal-caption {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.95rem;
+            font-weight: 400;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(8px);
+            padding: 10px 28px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            max-width: 80%;
+            text-align: center;
+            letter-spacing: 0.2px;
+            font-family: 'Inter', sans-serif;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .image-modal .modal-counter {
+            position: fixed;
+            top: 28px;
+            left: 32px;
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            font-family: 'Inter', sans-serif;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 6px 18px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(4px);
+        }
+        .image-modal .modal-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 2.8rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            padding: 20px 16px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            line-height: 1;
+            user-select: none;
+            z-index: 5;
+        }
+        .image-modal .modal-nav:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.06);
+        }
+        .image-modal .modal-nav.prev {
+            left: 20px;
+        }
+        .image-modal .modal-nav.next {
+            right: 20px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-content .bio-short {
+                margin: 0 auto 28px;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .hero-social {
+                justify-content: center;
+            }
+            .hero-avatar {
+                width: 220px;
+                height: 220px;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .project-card.expanded {
+                grid-column: 1 / -1;
+            }
+            .expanded-images {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            .thesis-expand-inner .expanded-images {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: rgba(10, 22, 40, 0.96);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 80px 40px 40px;
+                gap: 20px;
+                transition: right 0.4s ease;
+                border-left: 1px solid rgba(255, 255, 255, 0.06);
+            }
+            .nav-links.open {
+                right: 0;
+            }
+            .hamburger {
+                display: flex;
+                z-index: 1001;
+            }
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .section-title {
+                font-size: 1.6rem;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            .web-grid {
+                grid-template-columns: 1fr;
+            }
+            .skills-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .leadership-grid {
+                grid-template-columns: 1fr;
+            }
+            .awards-list {
+                grid-template-columns: 1fr;
+            }
+            .about-info-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            .thesis-body {
+                padding: 24px 20px 16px;
+            }
+            .thesis-img {
+                height: 180px;
+            }
+            .thesis-expand {
+                padding: 0 20px 0 20px;
+            }
+            .thesis-card.expanded .thesis-expand {
+                padding: 0 20px 20px 20px;
+            }
+            .edu-item {
+                padding: 20px;
+            }
+            .contact-item {
+                padding: 14px 18px;
+            }
+            .section-padding {
+                padding: 50px 0;
+            }
+            .hero {
+                min-height: auto;
+                padding: 120px 0 60px;
+            }
+            .project-card.expanded {
+                grid-column: 1 / -1;
+            }
+            .expanded-images {
+                grid-template-columns: 1fr 1fr;
+            }
+            .project-expand {
+                padding: 0 20px 0 20px;
+            }
+            .project-card.expanded .project-expand {
+                padding: 0 20px 20px 20px;
+            }
+            .image-modal .modal-nav {
+                font-size: 2rem;
+                padding: 14px 10px;
+            }
+            .image-modal .modal-nav.prev {
+                left: 6px;
+            }
+            .image-modal .modal-nav.next {
+                right: 6px;
+            }
+            .image-modal .modal-close {
+                top: 16px;
+                right: 18px;
+                font-size: 2rem;
+                width: 44px;
+                height: 44px;
+            }
+            .image-modal .modal-counter {
+                top: 18px;
+                left: 18px;
+                font-size: 0.7rem;
+                padding: 4px 14px;
+            }
+            .image-modal .modal-caption {
+                font-size: 0.8rem;
+                padding: 8px 18px;
+                bottom: 20px;
+                max-width: 90%;
+                white-space: normal;
+            }
+            .image-modal {
+                padding: 16px;
+            }
+            .image-modal .modal-content {
+                max-width: 98vw;
+                max-height: 82vh;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            .hero-avatar {
+                width: 160px;
+                height: 160px;
+            }
+            .project-body {
+                padding: 18px 20px 16px;
+            }
+            .project-expand {
+                padding: 0 16px 0 16px;
+            }
+            .project-card.expanded .project-expand {
+                padding: 0 16px 16px 16px;
+            }
+            .expanded-images {
+                grid-template-columns: 1fr;
+            }
+            .expanded-images .img-item img {
+                height: 140px;
+            }
+            .thesis-expand {
+                padding: 0 16px 0 16px;
+            }
+            .thesis-card.expanded .thesis-expand {
+                padding: 0 16px 16px 16px;
+            }
+            .thesis-expand-inner .expanded-images {
+                grid-template-columns: 1fr;
+            }
+            .thesis-expand-inner .expanded-images .img-item img {
+                height: 140px;
+            }
+            .image-modal .modal-nav {
+                font-size: 1.5rem;
+                padding: 10px 6px;
+            }
+            .image-modal .modal-close {
+                top: 12px;
+                right: 12px;
+                font-size: 1.6rem;
+                width: 36px;
+                height: 36px;
+            }
+            .image-modal .modal-caption {
+                font-size: 0.7rem;
+                padding: 6px 14px;
+                bottom: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== CANVAS BACKGROUND ===== -->
+    <canvas id="bme-canvas"></canvas>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav id="navbar">
+        <div class="container">
+            <a href="#" class="logo">Sanzida<span>.</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#thesis">Thesis</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#webprojects">Web</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Hi, I'm <span class="highlight">Sanzida Afrin</span></h1>
+                <p class="tagline">Biomedical Engineer</p>
+                <p class="bio-short">
+                    Research enthusiast with interests in molecular biology, bioinformatics, biomedical instrumentation, prosthetics, robotics, healthcare technology, and programming. Focused on developing interdisciplinary engineering solutions that bridge medicine and technology for improved diagnosis, rehabilitation, and patient care.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary"><i class="fas fa-flask" style="margin-right:8px;"></i> View Projects</a>
+                    <a href="#contact" class="btn btn-outline-light">Get in Touch</a>
+                </div>
+                <div class="hero-social">
+                    <a href="https://github.com/Oishy17" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/sanzida-afrin-4a0861250/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:sanzidaoishy@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="#" aria-label="Phone"><i class="fas fa-phone"></i></a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-avatar" id="profileAvatar">
+                    <img src="1.jpeg" alt="Sanzida Afrin" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="section-padding bg-white" id="about">
+        <div class="container">
+            <h2 class="section-title section-title-center">About Me</h2>
+            <p class="section-subtitle">Biomedical Engineering graduate from MIST with a passion for healthcare innovation.</p>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>I am a Biomedical Engineering graduate from <strong>Military Institute of Science and Technology (MIST)</strong> with a strong interest in biomedical instrumentation, prosthetics, robotics, and healthcare technology.</p>
+                    <p>I have experience working on research and engineering projects involving EMG-controlled prosthetic systems, embedded systems, biomedical signal processing, web development, and both wet lab and dry lab research methodologies.</p>
+                    <p>I am passionate about applying engineering principles to develop innovative healthcare solutions and continuously improving my technical and research skills.</p>
+                </div>
+                <div class="about-info-grid">
+                    <div class="about-info-item"><span class="label">Phone</span><span class="value">: 01613077733</span></div>
+                    <div class="about-info-item"><span class="label">Email</span><span class="value"><a href="mailto:sanzidaoishy@gmail.com" style="color:#1e3a5f;">: sanzidaoishy@gmail.com</a></span></div>
+                    <div class="about-info-item"><span class="label">GitHub</span><span class="value"><a href="https://github.com/Oishy17" target="_blank" style="color:#1e3a5f;">: github.com/Oishy17</a></span></div>
+                    <div class="about-info-item"><span class="label">LinkedIn</span><span class="value"><a href="https://www.linkedin.com/in/sanzida-afrin-4a0861250/" target="_blank" style="color:#1e3a5f;">: Sanzida Afrin</a></span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== THESIS ===== -->
+    <section class="section-padding bg-light" id="thesis">
+        <div class="container">
+            <h2 class="section-title section-title-center">B.Sc. Thesis</h2>
+            <p class="section-subtitle">Design and Development of a Low-Cost Anthropomorphic Prosthetic Hand with Hybrid EMG and Tactile Control</p>
+            <div class="thesis-wrapper">
+                <div class="thesis-card" id="thesisCard">
+                    <div class="thesis-img" data-img="images/the.png">
+                        <img src="images/the.png" alt="Prosthetic Hand Thesis" />
+                        <span class="click-hint"><i class="fas fa-expand"></i> Full screen</span>
+                    </div>
+                    <div class="thesis-body">
+                        <h3>Design and Development of a Low-Cost Anthropomorphic Prosthetic Hand with Hybrid EMG and Tactile Control</h3>
+                        <ul>
+                            <li>Developed a dual-mode prosthetic robotic arm controlled via EMG signals and a foot-switch based system.</li>
+                            <li>Designed a user-driven calibration system with EMG threshold adjustment through a web interface.</li>
+                            <li>Integrated a self-calibration mode for personalized control tuning based on individual muscle signals.</li>
+                            <li>Focused on improving usability, adaptability, and accessibility of prosthetic control systems.</li>
+                        </ul>
+                        <div class="thesis-tools">
+                            <span>EMG Sensors</span>
+                            <span>Web Interface (HTML/CSS/JS)</span>
+                            <span>Embedded Systems</span>
+                            <span>Tactile Control</span>
+                        </div>
+                        <span class="expand-toggle" id="thesisToggle">View Details <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="thesis-expand" id="thesisExpand">
+                        <div class="thesis-expand-inner">
+                            <div class="detail-text">
+                                <p><strong></strong> This thesis focuses on the design and development of a low-cost, anthropomorphic prosthetic hand that combines EMG signal control with tactile feedback. The system is designed to be affordable and accessible for amputees in developing countries.</p>
+                                <p><strong>Key Contributions:</strong></p>
+                                <ul>
+                                    <li><strong>Hybrid Control System:</strong> Integration of EMG-based gesture recognition with tactile control for redundant operation.</li>
+                                    <li><strong>Calibration Interface:</strong> Web-based EMG threshold calibration for personalized control tuning.</li>
+                                    <li><strong>Tactile Feedback:</strong> Incorporated pressure sensors for grip force feedback.</li>
+                                    <li><strong>EMG Control:</strong> Both three and five finger Gripping.</li>
+                                </ul>
+                            </div>
+                            <div class="expanded-images">
+                                <div class="img-item" data-img="images/the3.png">
+                                    <img src="images/the3.png" alt="Thesis - CAD Design" />
+                                    <div class="caption">EMG-Controlled Prosthetic Hand Simulation.</div>
+                                </div>
+                                <div class="img-item" data-img="images/the2.png">
+                                    <img src="images/the2.png" alt="Thesis - PCB Assembly" />
+                                    <div class="caption">Electrode placement for EMG Signal Acquisition</div>
+                                </div>
+                                <div class="img-item" data-img="images/the4.png">
+                                    <img src="images/the4.png" alt="Thesis - Calibration Interface" />
+                                    <div class="caption">Prototype hardware configurations Hand A and Hand B.</div>
+                                </div>
+                                <div class="img-item" data-img="images/the5.png">
+                                    <img src="images/the5.png" alt="Thesis - Prototype" />
+                                    <div class="caption">Welcome screen interface.</div>
+                                </div>
+                                <div class="img-item" data-img="images/the7.png">
+                                    <img src="images/the7.png" alt="Thesis - Testing" />
+                                    <div class="caption">Object grasping performance of Hand A and Hand B across Subjects.</div>
+                                </div>
+                                <div class="img-item" data-img="images/the6.png">
+                                    <img src="images/the6.png" alt="Thesis - Testing" />
+                                    <div class="caption">Pen grasping: (A)Hand A and (B)Hand B.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section class="section-padding bg-white" id="projects">
+        <div class="container">
+            <h2 class="section-title section-title-center">Engineering Projects</h2>
+            <p class="section-subtitle">Click on any project card to expand and see more details, images, and captions.</p>
+            <div class="projects-grid" id="projectsGrid">
+
+                <!-- 1. Edible Soft Robotics -->
+                <div class="project-card" data-project="1">
+                    <div class="project-img" data-img="images/project1.png">
+                        <img src="images/project1.png" alt="Edible Soft Robotics" />
+                        <span class="click-hint"><i class="fas fa-expand"></i> Full screen</span>
+                    </div>
+                    <div class="project-body">
+                        <h4>Edible Soft Robotics</h4>
+                        <p class="project-brief">Soft robotic system using edible and biodegradable materials for sustainable biomedical applications. Pneumatic actuation with self-oscillating acid-base reactions.</p>
+                        <div class="tools"><span>Gelatin-based</span><span>Molding &amp; Casting</span><span>Pneumatic Actuation</span></div>
+                        <span class="expand-toggle">View Details <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="project-expand">
+                        <div class="project-expand-inner">
+                            <div class="detail-text">
+                                <p><strong>Overview:</strong> This project explores the development of soft robotic systems using edible and biodegradable materials. The goal is to create sustainable, temporary biomedical devices that can be safely consumed or degraded after use.</p>
+                                <p><strong>Key Highlights:</strong></p>
+                                <ul>
+                                    <li><strong>Material Formulation:</strong> Developed gelatin-based biocompatible materials with tunable mechanical properties.</li>
+                                    <li><strong>Pneumatic Actuation:</strong> Designed soft actuators that respond to low-pressure air input.</li>
+                                    <li><strong>Self-Oscillating System:</strong> Implemented acid-base reaction-driven autonomous motion without external power.</li>
+                                    <li><strong>Biomedical Applications:</strong> Potential use in assisting patients with paralysis, dysphagia, or those unable to take medication orally.</li>
+                                </ul>
+                                <p><strong>Tools &amp; Techniques:</strong> Gelatin-based molding and casting, pneumatic control systems, chemical reaction analysis.</p>
+                            </div>
+                            <div class="expanded-images">
+                                <div class="img-item" data-img="images/project1a.jpg"><img src="images/project1a.jpg" alt="Edible Soft Robotics - Material Testing" /><div class="caption">Material formulation and biocompatibility testing</div></div>
+                                <div class="img-item" data-img="images/project1b.jpg"><img src="images/project1b.jpg" alt="Edible Soft Robotics - Actuator Design" /><div class="caption">Pneumatic actuator design and deformation control</div></div>
+                                <div class="img-item" data-img="images/project1c.jpg"><img src="images/project1c.jpg" alt="Edible Soft Robotics - Self-Oscillating System" /><div class="caption">Self-oscillating acid-base reaction system for autonomous motion</div></div>
+                                <div class="img-item" data-img="images/project1d.jpg"><img src="images/project1d.jpg" alt="Edible Soft Robotics - Final Prototype" /><div class="caption">Final prototype demonstrating gripping and actuation</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Non-Invasive Glucose Monitoring System -->
+                <div class="project-card" data-project="2">
+                    <div class="project-img" data-img="images/project2.png">
+                        <img src="images/project2.png" alt="Non-Invasive Glucose Monitoring" />
+                        <span class="click-hint"><i class="fas fa-expand"></i> Full screen</span>
+                    </div>
+                    <div class="project-body">
+                        <h4>Non-Invasive Glucose Monitoring System</h4>
+                        <p class="project-brief">Glucose estimation using optical PPG signals with ML model for improved accuracy. Real-time prediction on embedded system.</p>
+                        <div class="tools"><span>MATLAB</span><span>ESP32</span><span>ML</span><span>Signal Processing</span></div>
+                        <span class="expand-toggle">View Details <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="project-expand">
+                        <div class="project-expand-inner">
+                            <div class="detail-text">
+                                <p><strong>Overview:</strong> A non-invasive glucose monitoring system that uses optical PPG (photoplethysmography) signals to estimate blood glucose levels. The system combines signal processing, machine learning, and embedded systems for real-time prediction.</p>
+                                <p><strong>Key Highlights:</strong></p>
+                                <ul>
+                                    <li><strong>Signal Preprocessing:</strong> Implemented noise filtering and artifact removal from PPG signals.</li>
+                                    <li><strong>Feature Extraction:</strong> Extracted key features from PPG signals correlated with glucose levels.</li>
+                                    <li><strong>Machine Learning Model:</strong> Developed and trained ML models to improve prediction accuracy.</li>
+                                    <li><strong>Custom Dataset:</strong> Collected synchronized data from the developed system and a standard glucometer.</li>
+                                    <li><strong>Real-time Deployment:</strong> Deployed the model on ESP32 for real-time glucose prediction.</li>
+                                </ul>
+                                <p><strong>Tools &amp; Techniques:</strong> MATLAB for signal processing and ML, ESP32 for embedded deployment, PPG sensor integration.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Tumor Detection by Image Segmentation -->
+                <div class="project-card" data-project="3">
+                    <div class="project-img" data-img="images/project3.jpg">
+                        <img src="images/project3.jpg" alt="Tumor Detection by Image Segmentation" />
+                        <span class="click-hint"><i class="fas fa-expand"></i> Full screen</span>
+                    </div>
+                    <div class="project-body">
+                        <h4>Tumor Detection by Image Segmentation</h4>
+                        <p class="project-brief">Active contour (snake model) for biomedical image segmentation. Boundary detection and region extraction with parameter tuning.</p>
+                        <div class="tools"><span>MATLAB</span><span>Image Processing</span><span>Active Contour</span></div>
+                        <span class="expand-toggle">View Details <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="project-expand">
+                        <div class="project-expand-inner">
+                            <div class="detail-text">
+                                <p><strong>Overview:</strong> Implemented active contour (snake model) algorithm for biomedical image segmentation to detect tumor boundaries in medical images. The system uses image processing techniques for accurate boundary detection and region extraction.</p>
+                                <p><strong>Key Highlights:</strong></p>
+                                <ul>
+                                    <li><strong>Active Contour Model:</strong> Implemented and optimized the snake model for tumor boundary detection.</li>
+                                    <li><strong>Image Preprocessing:</strong> Applied preprocessing techniques to enhance image quality and contrast.</li>
+                                    <li><strong>Parameter Tuning:</strong> Optimized model parameters for different image types and tumor characteristics.</li>
+                                    <li><strong>Region Extraction:</strong> Accurate extraction of tumor regions from medical images.</li>
+                                </ul>
+                                <p><strong>Tools &amp; Techniques:</strong> MATLAB image processing toolbox, active contour algorithms, parameter optimization.</p>
+                            </div>
+                            <div class="expanded-images">
+                                <div class="img-item" data-img="images/project3a.png"><img src="images/project3a.png" alt="Tumor Detection - Original Image" /><div class="caption">Original medical image with tumor region</div></div>
+                                <div class="img-item" data-img="images/project3b.png"><img src="images/project3b.png" alt="Tumor Detection - Segmentation Result" /><div class="caption">Active contour segmentation result showing tumor boundary</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Andromorphic Robotic Arm -->
+                <div class="project-card" data-project="4">
+                    <div class="project-img" data-img="images/project4.png">
+                        <img src="images/project4.png" alt="Andromorphic Robotic Arm" />
+                        <span class="click-hint"><i class="fas fa-expand"></i> Full screen</span>
+                    </div>
+                    <div class="project-body">
+                        <h4>Andromorphic Robotic Arm</h4>
+                        <p class="project-brief">Dual-mode prosthetic arm with EMG gesture recognition and web-based remote control. ESP32-based real-time actuation.</p>
+                        <div class="tools"><span>ESP32</span><span>EMG Sensors</span><span>Arduino</span><span>Web Interface</span></div>
+                        <span class="expand-toggle">View Details <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="project-expand">
+                        <div class="project-expand-inner">
+                            <div class="detail-text">
+                                <p><strong>Overview:</strong> A dual-mode prosthetic robotic arm that can be controlled using EMG signals from muscle activity and through a web-based remote interface. The system uses ESP32 for real-time control and actuation.</p>
+                                <p><strong>Key Highlights:</strong></p>
+                                <ul>
+                                    <li><strong>EMG Gesture Recognition:</strong> Classifies muscle signals to control hand gestures.</li>
+                                    <li><strong>Web-based Remote Control:</strong> Manual override and control through a responsive web interface.</li>
+                                    <li><strong>ESP32 Integration:</strong> Real-time signal processing and motor actuation.</li>
+                                    <li><strong>Hybrid Control:</strong> Seamless switching between EMG and remote control modes.</li>
+                                </ul>
+                                <p><strong>Tools &amp; Techniques:</strong> ESP32 microcontroller, EMG sensors, Arduino ecosystem, web interface (HTML/CSS/JS).</p>
+                            </div>
+                            <div class="expanded-images">
+                                <div class="img-item" data-img="images/project4a.png"><img src="images/project4a.png" alt="Robotic Arm - Hardware Setup" /><div class="caption">HWeb-based remote control interface</div></div>
+                                <div class="img-item" data-img="images/project4b.png"><img src="images/project4b.png" alt="Robotic Arm - EMG Control" /><div class="caption">EMG signal</div></div>
+                                <div class="img-item" data-img="images/project4c.png"><img src="images/project4c.png" alt="Robotic Arm - Web Interface" /><div class="caption">Controller app</div></div>
+                                <div class="img-item" data-img="images/project4d.png"><img src="images/project4d.png" alt="Robotic Arm - Final Prototype" /><div class="caption">Welcome interface</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Microfluidic Lab-on-Chip System -->
+                <div class="project-card" data-project="5">
+                    <div class="project-img" data-img="images/project5.png">
+                        <img src="images/project5.png" alt="Microfluidic Lab-on-Chip System" />
+                        <span class="click-hint"><i class="fas fa-expand"></i> Full screen</span>
+                    </div>
+                    <div class="project-body">
+                        <h4>Microfluidic Lab-on-Chip System</h4>
+                        <p class="project-brief">PDMS-based microfluidic device for studying fluid flow and drug transport across membrane barriers. Soft lithography fabrication.</p>
+                        <div class="tools"><span>ANSYS</span><span>PDMS</span><span>Soft Lithography</span><span>CFD</span></div>
+                        <span class="expand-toggle">View Details <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="project-expand">
+                        <div class="project-expand-inner">
+                            <div class="detail-text">
+                                <p><strong>Overview:</strong> Designed and fabricated a microfluidic lab-on-chip platform using PDMS through soft lithography techniques. The device simulates blood/plasma flow and drug diffusion in controlled microchannels to study transport across membrane barriers.</p>
+                                <p><strong>Key Highlights:</strong></p>
+                                <ul>
+                                    <li><strong>Device Fabrication:</strong> PDMS-based device fabricated using soft lithography and molding-casting techniques.</li>
+                                    <li><strong>Fluid Flow Simulation:</strong> Simulated blood and plasma flow in microchannels using ANSYS.</li>
+                                    <li><strong>Drug Transport Study:</strong> Investigated drug diffusion and cross-membrane interaction.</li>
+                                    <li><strong>Material Properties:</strong> Analyzed PDMS material properties for biomedical applications.</li>
+                                </ul>
+                                <p><strong>Tools &amp; Techniques:</strong> ANSYS for CFD simulation, soft lithography, PDMS molding and casting, microchannel design.</p>
+                            </div>
+                            <div class="expanded-images">
+                                <div class="img-item" data-img="images/project5a.png"><img src="images/project5a.png" alt="Microfluidic - Device Design" /><div class="caption">Detailed poster.</div></div>
+                                <div class="img-item" data-img="images/project5b.png"><img src="images/project5b.png" alt="Microfluidic - Fabrication" /><div class="caption">Mold Design </div></div>
+                                <div class="img-item" data-img="images/project5c.png"><img src="images/project5c.png" alt="Microfluidic - CFD Simulation" /><div class="caption">Microfluidic Device</div></div>
+                                <div class="img-item" data-img="images/project5d.png"><img src="images/project5d.png" alt="Microfluidic - Poster Presentation" /><div class="caption">Simulation Result</div></div>
+                                <div class="img-item" data-img="images/project5e.png"><img src="images/project5e.png" alt="Microfluidic - Poster Presentation" /><div class="caption">BBB Result</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Drug Targets in HTLV-1 -->
+                <div class="project-card" data-project="6">
+                    <div class="project-img" data-img="images/project6.jpg">
+                        <img src="images/project6.jpg" alt="Drug Targets in HTLV-1" />
+                        <span class="click-hint"><i class="fas fa-expand"></i> Full screen</span>
+                    </div>
+                    <div class="project-body">
+                        <h4>Drug Targets in HTLV-1</h4>
+                        <p class="project-brief">In silico screening and molecular docking to identify potential drug targets in HTLV-1. Binding affinity analysis for antiviral discovery.</p>
+                        <div class="tools"><span>AutoDock</span><span>PyRx</span><span>BLAST</span><span>GROMACS</span></div>
+                        <span class="expand-toggle">View Details <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="project-expand">
+                        <div class="project-expand-inner">
+                            <div class="detail-text">
+                                <p><strong>Overview:</strong> Conducted computational analysis to identify potential drug targets in HTLV-1 (Human T-lymphotropic virus type 1) using integrated in silico approaches. The study combines bioinformatics screening, molecular docking, and dynamics simulations.</p>
+                                <p><strong>Key Highlights:</strong></p>
+                                <ul>
+                                    <li><strong>Bioinformatics Screening:</strong> Used BLAST, UniProt, and Clustal Omega for sequence analysis.</li>
+                                    <li><strong>Molecular Docking:</strong> Performed docking studies using AutoDock and PyRx to evaluate protein-ligand interactions.</li>
+                                    <li><strong>Binding Affinity Analysis:</strong> Analyzed drug-target binding affinities to identify promising candidates.</li>
+                                    <li><strong>Molecular Dynamics:</strong> Used GROMACS for MD simulations to validate binding stability.</li>
+                                </ul>
+                                <p><strong>Tools &amp; Techniques:</strong> AutoDock, PyRx, BLAST, Discovery Studio, GROMACS, PyMOL, Clustal Omega.</p>
+                            </div>
+                            <div class="expanded-images">
+                                <div class="img-item" data-img="images/project6a.jpg"><img src="images/project6a.jpg" alt="HTLV-1 - Protein Structure" /><div class="caption">Protein structure visualization using PyMOL</div></div>
+                                <div class="img-item" data-img="images/project6b.jpg"><img src="images/project6b.jpg" alt="HTLV-1 - Docking Results" /><div class="caption">Molecular docking results showing protein-ligand interactions</div></div>
+                                <div class="img-item" data-img="images/project6c.jpg"><img src="images/project6c.jpg" alt="HTLV-1 - Binding Analysis" /><div class="caption">Binding affinity analysis and interaction profiling</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WEB PROJECTS ===== -->
+    <section class="section-padding bg-light" id="webprojects">
+        <div class="container">
+            <h2 class="section-title section-title-center">Web Development Projects</h2>
+            <p class="section-subtitle">Interactive web interfaces for biomedical systems and more.</p>
+            <div class="web-grid">
+                <div class="web-card"><div class="web-img" data-img="images/web1.jpg"><img src="images/web1.jpg" alt="Einthoven Club" /><span class="click-hint"><i class="fas fa-expand"></i> View</span></div><div class="web-body"><h5>Einthoven Club Official Website</h5><p>Official website for the Biomedical Engineering club at MIST.</p><a href="https://einthovenclub.mist.ac.bd/" target="_blank">Visit <i class="fas fa-arrow-right"></i></a></div></div>
+                <div class="web-card"><div class="web-img" data-img="images/web2.jpg"><img src="images/web2.jpg" alt="Random Candidate Selection" /><span class="click-hint"><i class="fas fa-expand"></i> View</span></div><div class="web-body"><h5>Random Candidate Selection (BOESL)</h5><p>Fair randomization system for recruitment processes.</p><a href="https://oishy17.github.io/randomly/" target="_blank">Visit <i class="fas fa-arrow-right"></i></a></div></div>
+                <div class="web-card"><div class="web-img" data-img="images/web3.jpg"><img src="images/web3.jpg" alt="Robotic Arm Remote Control" /><span class="click-hint"><i class="fas fa-expand"></i> View</span></div><div class="web-body"><h5>Robotic Arm Remote Control</h5><p>Web interface for real-time remote control of prosthetic arm. Auth: sanzida/49.</p><a href="https://oishy17.github.io/hand/" target="_blank">Visit <i class="fas fa-arrow-right"></i></a></div></div>
+                <div class="web-card"><div class="web-img" data-img="images/web4.jpg"><img src="images/web4.jpg" alt="Glucose Monitoring Interface" /><span class="click-hint"><i class="fas fa-expand"></i> View</span></div><div class="web-body"><h5>Glucose Monitoring Interface</h5><p>Web-based visualization for non-invasive glucose monitoring system.</p><a href="https://oishy17.github.io/gluco/" target="_blank">Visit <i class="fas fa-arrow-right"></i></a></div></div>
+                <div class="web-card"><div class="web-img" data-img="images/web5.jpg"><img src="images/web5.jpg" alt="EMG Calibration System" /><span class="click-hint"><i class="fas fa-expand"></i> View</span></div><div class="web-body"><h5>EMG Calibration System</h5><p>Web-based calibration tool for personalized EMG threshold adjustment.</p><a href="https://oishy17.github.io/EMG_Calibration/" target="_blank">Visit <i class="fas fa-arrow-right"></i></a></div></div>
+                <div class="web-card"><div class="web-img" data-img="images/web6.jpg"><img src="images/web6.jpg" alt="EMG Data Recorder" /><span class="click-hint"><i class="fas fa-expand"></i> View</span></div><div class="web-body"><h5>EMG Data Recorder</h5><p>Real-time EMG signal collection and recording for dataset creation.</p><a href="https://oishy17.github.io/emg/" target="_blank">Visit <i class="fas fa-arrow-right"></i></a></div></div>
+                <div class="web-card"><div class="web-img" data-img="images/web7.jpg"><img src="images/web7.jpg" alt="Class Materials Tracker" /><span class="click-hint"><i class="fas fa-expand"></i> View</span></div><div class="web-body"><h5>Class Materials &amp; CT/Mid Tracker</h5><p>Academic tracking platform for coursework and exam preparation.</p><a href="https://alvera5545.hocoos.com/" target="_blank">Visit <i class="fas fa-arrow-right"></i></a></div></div>
+                <div class="web-card"><div class="web-img" data-img="images/web8.jpg"><img src="images/web8.jpg" alt="Food Blog BD" /><span class="click-hint"><i class="fas fa-expand"></i> View</span></div><div class="web-body"><h5>Food Blog BD (UI Design)</h5><p>Restaurant menu and food blog interface with focus on UI/UX.</p><a href="https://oishy17.github.io/MyFooldblogBD/" target="_blank">Visit <i class="fas fa-arrow-right"></i></a></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EDUCATION ===== -->
+    <section class="section-padding bg-white" id="education">
+        <div class="container">
+            <h2 class="section-title section-title-center">Education</h2>
+            <p class="section-subtitle">My academic journey in Biomedical Engineering and Science.</p>
+            <div class="education-timeline">
+                <div class="edu-item"><div class="degree">Bachelor of Science (B.Sc.) in Biomedical Engineering</div><div class="institution">Military Institute of Science and Technology (MIST)</div><div class="meta"><span><i class="fas fa-calendar-alt"></i> Year: 2026</span><span><i class="fas fa-star"></i> CGPA: 3.65 / 4.00</span></div></div>
+                <div class="edu-item"><div class="degree">Higher Secondary Certificate (HSC) — Science</div><div class="institution">Engineering University School and College</div><div class="meta"><span><i class="fas fa-calendar-alt"></i> Year: 2021</span><span><i class="fas fa-star"></i> GPA: 5.00 / 5.00</span><span><i class="fas fa-flask"></i> Physics, Chemistry, Biology</span></div></div>
+                <div class="edu-item"><div class="degree">Secondary School Certificate (SSC) — Science</div><div class="institution">Sher-e Bangla Bakila Mohavialaya</div><div class="meta"><span><i class="fas fa-calendar-alt"></i> Year: 2019</span><span><i class="fas fa-star"></i> GPA: 5.00 / 5.00</span><span><i class="fas fa-flask"></i> Physics, Chemistry, Biology</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RESEARCH INTERESTS ===== -->
+    <section class="section-padding bg-light" id="research">
+        <div class="container">
+            <h2 class="section-title section-title-center">Research Interests</h2>
+            <p class="section-subtitle">Areas I am passionate about exploring and contributing to.</p>
+            <div class="interests-grid">
+                <span class="interest-tag">Biomedical Instrumentation</span><span class="interest-tag">EMG-based Prosthetics</span><span class="interest-tag">Human–Machine Interaction</span><span class="interest-tag">Robotics in Healthcare</span><span class="interest-tag">Embedded Systems</span><span class="interest-tag">Microfluidics &amp; Lab-on-a-Chip</span><span class="interest-tag">Wet Lab &amp; Dry Lab Techniques</span><span class="interest-tag">Edible &amp; Soft Robotics</span><span class="interest-tag">Cancer Research</span><span class="interest-tag">Bioinformatics</span><span class="interest-tag">AI-based Disease Detection</span><span class="interest-tag">Rehabilitation Guidance Systems</span><span class="interest-tag">Non-invasive Glucose Monitoring</span><span class="interest-tag">Biomedical Signal Processing</span><span class="interest-tag">Data-driven Healthcare</span><span class="interest-tag">Biomedical Data Visualization</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section class="section-padding bg-white" id="skills">
+        <div class="container">
+            <h2 class="section-title section-title-center">Technical Skills</h2>
+            <p class="section-subtitle">Tools, languages, and platforms I work with.</p>
+            <div class="skills-wrapper">
+                <div class="skill-category"><h4><i class="fas fa-code"></i> Programming</h4><div class="skill-tags"><span>Python (Basic)</span><span>MATLAB</span><span>C</span><span>HTML/CSS/JS</span><span>PHP</span><span>Laravel</span><span>Tailwind CSS</span></div></div>
+                <div class="skill-category"><h4><i class="fas fa-microscope"></i> Simulation &amp; Computational</h4><div class="skill-tags"><span>GROMACS</span><span>ANSYS</span><span>AutoDock/PyRx</span><span>PyMOL</span><span>Discovery Studio</span><span>Clustal Omega</span><span>BLAST</span><span>UniProt</span><span>PDB</span></div></div>
+                <div class="skill-category"><h4><i class="fas fa-microchip"></i> Hardware &amp; Embedded</h4><div class="skill-tags"><span>ESP32</span><span>Arduino</span><span>Biomedical Sensors</span><span>SolidWorks</span><span>Proteus (Basic)</span><span>COMSOL Multiphysics</span><span>OpenSim</span><span>Kimera</span></div></div>
+                <div class="skill-category"><h4><i class="fas fa-flask"></i> Laboratory &amp; Technical</h4><div class="skill-tags"><span>Embedded Systems</span><span>Biomedical Device Integration</span><span>Rehabilitation Engineering</span><span>Biochemistry</span><span>Biomaterials</span><span>Biomechanics</span><span>Molecular Biology</span><span>Biomedical Instrumentation</span><span>Biosignal Acquisition</span><span>Signal Processing</span><span>Biomedical Image Processing</span><span>Wet Lab &amp; Dry Lab</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EXPERIENCE ===== -->
+    <section class="section-padding bg-light" id="experience">
+        <div class="container">
+            <h2 class="section-title section-title-center">Experience</h2>
+            <p class="section-subtitle">Internships and research involvement.</p>
+            <div class="exp-timeline">
+                <div class="exp-item"><div class="exp-title">Internship Trainee</div><div class="exp-org">Ibn Sina Hospital</div><div class="exp-date">March 15, 2024 – April 20, 2024</div><div class="exp-desc">Observed and assisted in biomedical and clinical operational activities. Gained practical exposure to medical equipment handling and hospital-based healthcare systems.</div></div>
+                <div class="exp-item"><div class="exp-title">Internship Trainee</div><div class="exp-org">CMH Bangladesh</div><div class="exp-date">May 12, 2025 – June 4, 2025</div><div class="exp-desc">Participated in biomedical engineering and technical support activities. Gained experience in medical device systems and healthcare technology environments.</div></div>
+                <div class="exp-item"><div class="exp-title">Member, URC Science Team</div><div class="exp-org">University Rover Challenge Science Team</div><div class="exp-date">2023</div><div class="exp-desc">Participated in science and research-oriented activities related to soil sample analysis.</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LEADERSHIP ===== -->
+    <section class="section-padding bg-white" id="leadership">
+        <div class="container">
+            <h2 class="section-title section-title-center">Leadership &amp; Extracurricular</h2>
+            <p class="section-subtitle">Roles that shaped my collaborative and organizational skills.</p>
+            <div class="leadership-grid">
+                <div class="lead-card"><h5>President</h5><div class="lead-org">MIST Einthoven Club</div><div class="lead-year">2026</div><p>Organized "Celestra '26", a successful biomedical-focused event promoting innovation and interdisciplinary collaboration.</p></div>
+                <div class="lead-card"><h5>Executive Member (App &amp; Web Development)</h5><div class="lead-org">MIST Innovation Club</div><div class="lead-year">2024 – 2025</div><p>Contributed to app and web development initiatives. Designed and developed login systems and member management pages.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AWARDS ===== -->
+    <section class="section-padding bg-light" id="awards">
+        <div class="container">
+            <h2 class="section-title section-title-center">Awards &amp; Achievements</h2>
+            <p class="section-subtitle">Recognitions and certifications.</p>
+            <div class="awards-list">
+                <div class="award-item"><div class="award-icon"><i class="fas fa-trophy"></i></div><div class="award-text"><strong>Champion, Poster Presentation Competition 2025</strong><div class="award-detail">MIST – "Andromorphic Robotic Hand" (EMG &amp; remote control)</div></div></div>
+                <div class="award-item"><div class="award-icon"><i class="fas fa-certificate"></i></div><div class="award-text"><strong>Deep Learning Methods for Engineers Certification</strong><div class="award-detail">Biomedical Research and Innovation Center – ML &amp; DL with MATLAB</div></div></div>
+                <div class="award-item"><div class="award-icon"><i class="fas fa-certificate"></i></div><div class="award-text"><strong>Introduction to CFD Certification</strong><div class="award-detail">Biomedical Research and Innovation Center – ANSYS simulation</div></div></div>
+                <div class="award-item"><div class="award-icon"><i class="fas fa-medal"></i></div><div class="award-text"><strong>Internship Completion Certificate</strong><div class="award-detail">CMH Dhaka – 24-day program (May–June 2025)</div></div></div>
+                <div class="award-item"><div class="award-icon"><i class="fas fa-star"></i></div><div class="award-text"><strong>5th Place – 1st Old Dhaka Girls' Science Festival 2017</strong><div class="award-detail">Science project presentation</div></div></div>
+                <div class="award-item"><div class="award-icon"><i class="fas fa-pencil-alt"></i></div><div class="award-text"><strong>2nd Place – Poster Design Competition</strong><div class="award-detail">MRC, 2022</div></div></div>
+                <div class="award-item" style="grid-column:1/-1;"><div class="award-icon"><i class="fas fa-users"></i></div><div class="award-text"><strong>Additional Recognitions</strong><div class="award-detail">BEAR Summit &amp; National Semiconductor Symposium 2025 • Web Development Training – MIST Innovation Club • 3rd XELC National English Language Festival 2021</div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="section-padding bg-white" id="contact">
+        <div class="container">
+            <h2 class="section-title section-title-center">Contact</h2>
+            <p class="section-subtitle">Let's connect and collaborate on healthcare innovation.</p>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <div class="contact-item"><div class="ci-icon"><i class="fas fa-phone-alt"></i></div><div class="ci-text"><span class="label">Phone:</span> 01613077733</div></div>
+                    <div class="contact-item"><div class="ci-icon"><i class="fas fa-envelope"></i></div><div class="ci-text"><span class="label">Email:</span> <a href="mailto:sanzidaoishy@gmail.com">sanzidaoishy@gmail.com</a></div></div>
+                    <div class="contact-item"><div class="ci-icon"><i class="fab fa-github"></i></div><div class="ci-text"><span class="label">GitHub:</span> <a href="https://github.com/Oishy17" target="_blank">github.com/Oishy17</a></div></div>
+                    <div class="contact-item"><div class="ci-icon"><i class="fab fa-linkedin-in"></i></div><div class="ci-text"><span class="label">LinkedIn:</span> <a href="https://www.linkedin.com/in/sanzida-afrin-4a0861250/" target="_blank">Sanzida Afrin</a></div></div>
+                    <div class="contact-social"><a href="https://github.com/Oishy17" target="_blank"><i class="fab fa-github"></i></a><a href="https://www.linkedin.com/in/sanzida-afrin-4a0861250/" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="mailto:sanzidaoishy@gmail.com"><i class="fas fa-envelope"></i></a><a href="#"><i class="fas fa-phone"></i></a></div>
+                    <div style="margin-top:8px; font-size:0.85rem; color:#2a3a4e;"><i class="fas fa-globe" style="color:#0288d1;"></i> Languages: Bengali (Native) • English (Professional)</div>
+                </div>
+                <div class="contact-refs">
+                    <h4 style="font-size:1.1rem; font-weight:700; color:#0a1628; margin-bottom:4px;">References</h4>
+                    <p style="color:#2a3a4e; font-size:0.9rem; margin-bottom:12px;">Academic supervisor and mentor.</p>
+                    <div class="ref-card"><div class="ref-name">Dr. Md. Tobibul Islam</div><div class="ref-title">Assistant Professor</div><div class="ref-org">Department of Biomedical Engineering, MIST</div><div class="ref-email"><i class="fas fa-envelope" style="font-size:0.75rem;"></i> <a href="mailto:tobibul.islam@bme.mist.ac.bd">tobibul.islam@bme.mist.ac.bd</a></div><div style="margin-top:6px; display:flex; gap:12px; font-size:0.8rem;"><a href="https://scholar.google.com/citations?user=LR3eyiwAAAAJ&hl=en" target="_blank" style="color:#0288d1;">Google Scholar</a><a href="https://www.researchgate.net/profile/Md-Islam-1475/research" target="_blank" style="color:#0288d1;">ResearchGate</a></div></div>
+                    <div style="background:rgba(255,255,255,0.3); backdrop-filter:blur(8px); border-radius:12px; padding:16px 20px; border:1px solid rgba(255,255,255,0.3);"><p style="font-size:0.85rem; color:#2a3a4e; margin:0;"><i class="fas fa-info-circle" style="color:#0288d1; margin-right:8px;"></i> Office: 3rd Floor, Tower-4, MIST, Mirpur Cantonment, Dhaka-1216, Bangladesh</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-social"><a href="https://github.com/Oishy17" target="_blank"><i class="fab fa-github"></i></a><a href="https://www.linkedin.com/in/sanzida-afrin-4a0861250/" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="mailto:sanzidaoishy@gmail.com"><i class="fas fa-envelope"></i></a></div>
+            <p>&copy; 2026 <span>Sanzida Afrin</span> — Biomedical Engineer &amp; Researcher</p>
+            <p style="font-size:0.8rem; margin-top:4px; opacity:0.6;">Built with <i class="fas fa-heart" style="color:#4fc3f7;"></i> for healthcare innovation</p>
+        </div>
+    </footer>
+
+    <!-- ===== FULL-SCREEN IMAGE MODAL ===== -->
+    <div class="image-modal" id="imageModal">
+        <span class="modal-close" id="modalClose"><i class="fas fa-times"></i></span>
+        <span class="modal-counter" id="modalCounter"></span>
+        <span class="modal-nav prev" id="modalPrev"><i class="fas fa-chevron-left"></i></span>
+        <span class="modal-nav next" id="modalNext"><i class="fas fa-chevron-right"></i></span>
+        <img class="modal-content" id="modalImg" src="" alt="" />
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+
+    <!-- 1. CANVAS BACKGROUND -->
+    <script>
+        (function() {
+            const canvas = document.getElementById('bme-canvas');
+            const ctx = canvas.getContext('2d');
+            let W, H;
+            let mouseX = 0.5,
+                mouseY = 0.5;
+            let targetMX = 0.5,
+                targetMY = 0.5;
+            let time = 0;
+
+            function resize() { W = canvas.width = window.innerWidth;
+                H = canvas.height = window.innerHeight; }
+            window.addEventListener('resize', resize);
+            resize();
+
+            document.addEventListener('mousemove', (e) => { targetMX = e.clientX / W;
+                targetMY = e.clientY / H; });
+            document.addEventListener('touchmove', (e) => { const t = e.touches[0]; if (t) { targetMX = t.clientX / W;
+                    targetMY = t.clientY / H; } }, { passive: true });
+            document.addEventListener('mouseleave', () => { targetMX = 0.5;
+                targetMY = 0.5; });
+            document.addEventListener('touchend', () => { targetMX = 0.5;
+                targetMY = 0.5; });
+
+            function drawSignal(cx, cy, w, h, time, alpha, color, label, pattern) {
+                ctx.save();
+                ctx.globalAlpha = alpha * 0.6;
+                ctx.strokeStyle = `rgba(2, 136, 209, 0.06)`;
+                ctx.lineWidth = 0.5;
+                ctx.setLineDash([3, 6]);
+                ctx.beginPath();
+                ctx.moveTo(cx - w / 2, cy);
+                ctx.lineTo(cx + w / 2, cy);
+                ctx.stroke();
+                ctx.setLineDash([]);
+                ctx.beginPath();
+                const steps = 80;
+                for (let i = 0; i <= steps; i++) {
+                    const t = i / steps;
+                    const x = cx - w / 2 + t * w;
+                    let y = 0;
+                    if (pattern === 'eeg') {
+                        if (t > 0.15 && t < 0.20) y = -0.9 + Math.sin(t * 80) * 0.2;
+                        else if (t > 0.35 && t < 0.38) y = 0.8 + Math.sin(t * 60) * 0.3;
+                        else if (t > 0.55 && t < 0.58) y = -0.7;
+                        else if (t > 0.75 && t < 0.78) y = 0.9;
+                        else { y = Math.sin(t * 10 + time * 0.004) * 0.3 + Math.sin(t * 22 + time * 0.006 + 1.5) * 0.15; }
+                    } else if (pattern === 'emg') {
+                        const burst = Math.sin(t * 20 + time * 0.005) * 0.5 + 0.5;
+                        y = Math.sin(t * 45 + time * 0.008) * (0.4 + 0.6 * burst) * 0.7;
+                        if (t > 0.2 && t < 0.25) y = Math.sin(t * 120 + time * 0.01) * 0.8;
+                        if (t > 0.6 && t < 0.65) y = Math.sin(t * 140 + time * 0.012) * 0.7;
+                    } else {
+                        const phase = (t * 4 + time * 0.002) % 1;
+                        if (phase < 0.05) y = 0.1;
+                        else if (phase < 0.15) y = 0.3 + Math.sin((phase - 0.05) * 60) * 0.2;
+                        else if (phase < 0.20) y = -0.4;
+                        else if (phase < 0.25) y = -0.9 + Math.sin((phase - 0.20) * 40) * 0.15;
+                        else if (phase < 0.30) y = -0.3;
+                        else if (phase < 0.45) y = 0.4 + Math.sin((phase - 0.30) * 20) * 0.2;
+                        else if (phase < 0.55) y = -0.1;
+                        else y = 0.1;
+                    }
+                    const yPos = cy + y * h * 0.45;
+                    if (i === 0) ctx.moveTo(x, yPos);
+                    else ctx.lineTo(x, yPos);
+                }
+                ctx.strokeStyle = color || 'rgba(79, 195, 247, 0.5)';
+                ctx.lineWidth = 2.5;
+                ctx.shadowColor = 'rgba(79, 195, 247, 0.15)';
+                ctx.shadowBlur = 8;
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+                ctx.fillStyle = `rgba(2, 136, 209, 0.25)`;
+                ctx.font = 'bold 11px Inter, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'bottom';
+                ctx.fillText(label || 'SIGNAL', cx - w / 2 + 4, cy - h / 2 + 14);
+                ctx.restore();
+            }
+
+            function drawDNA(cx, cy, radius, time, alpha) {
+                const segments = 32,
+                    height = radius * 1.8,
+                    twist = time * 0.0018;
+                ctx.save();
+                ctx.globalAlpha = alpha * 0.6;
+                for (let i = 0; i < segments; i++) {
+                    const t = (i / segments) * Math.PI * 2;
+                    const y = (i / segments - 0.5) * height;
+                    const x1 = cx + Math.cos(t + twist) * radius,
+                        x2 = cx + Math.cos(t + twist + Math.PI) * radius,
+                        yPos = cy + y;
+                    const bright = 0.6 + 0.4 * (1 - Math.abs(y) / height);
+                    ctx.beginPath();
+                    ctx.moveTo(x1, yPos);
+                    ctx.lineTo(x2, yPos);
+                    ctx.strokeStyle = `rgba(2, 136, 209, ${0.2 * bright})`;
+                    ctx.lineWidth = 1.8;
+                    ctx.stroke();
+                    const colors = [`rgba(2, 136, 209, ${0.5 * bright})`, `rgba(124, 77, 255, ${0.4 * bright})`];
+                    for (let s = 0; s < 2; s++) {
+                        const x = cx + Math.cos(t + twist + s * Math.PI) * radius;
+                        ctx.beginPath();
+                        ctx.arc(x, yPos, 4 + 2 * (1 - Math.abs(y) / height), 0, Math.PI * 2);
+                        ctx.fillStyle = colors[s];
+                        ctx.fill();
+                    }
+                }
+                ctx.restore();
+            }
+
+            function drawProtein(cx, cy, size, time, alpha) {
+                const residues = 18,
+                    radius = size * 0.45;
+                ctx.save();
+                ctx.globalAlpha = alpha * 0.35;
+                ctx.beginPath();
+                const pts = [];
+                for (let i = 0; i < residues; i++) {
+                    const t = i / residues;
+                    const angle = t * Math.PI * 3.5 + Math.sin(time * 0.001 + t * 4) * 0.6;
+                    const r = radius * (0.6 + 0.4 * Math.sin(time * 0.0008 + t * 3 + 1));
+                    const x = cx + Math.cos(angle + time * 0.0005) * r;
+                    const y = cy + Math.sin(angle * 0.7 + time * 0.0007) * r * 0.8;
+                    pts.push({ x, y });
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.strokeStyle = 'rgba(124, 77, 255, 0.25)';
+                ctx.lineWidth = 2.5;
+                ctx.stroke();
+                for (let i = 0; i < pts.length; i++) {
+                    const p = pts[i];
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, 3 + 2.5 * (1 - i / pts.length), 0, Math.PI * 2);
+                    ctx.fillStyle = `hsla(${220 + i * 3}, 70%, 65%, 0.35)`;
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+
+            function drawDocking(cx, cy, size, time, alpha) {
+                const radius = size * 0.4;
+                ctx.save();
+                ctx.globalAlpha = alpha * 0.3;
+                ctx.beginPath();
+                for (let i = 0; i < 24; i++) {
+                    const angle = (i / 24) * Math.PI * 2 + time * 0.0003;
+                    const bump = 1 + 0.15 * Math.sin(angle * 3 + time * 0.001);
+                    const r = radius * bump;
+                    const x = cx + Math.cos(angle) * r,
+                        y = cy + Math.sin(angle) * r * 0.9;
+                    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                }
+                ctx.closePath();
+                ctx.fillStyle = 'rgba(2, 136, 209, 0.06)';
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(2, 136, 209, 0.12)';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+                const ligandX = cx + radius * 0.8 + Math.sin(time * 0.001) * 15,
+                    ligandY = cy + Math.sin(time * 0.0015 + 1) * 12;
+                for (let i = 0; i < 6; i++) {
+                    const a = (i / 6) * Math.PI * 2 + time * 0.001,
+                        r2 = 6 * 0.9;
+                    const x1 = ligandX + Math.cos(a) * r2,
+                        y1 = ligandY + Math.sin(a) * r2;
+                    const x2 = ligandX + Math.cos(a + 0.8) * r2 * 0.7,
+                        y2 = ligandY + Math.sin(a + 0.8) * r2 * 0.7;
+                    ctx.beginPath();
+                    ctx.moveTo(x1, y1);
+                    ctx.lineTo(x2, y2);
+                    ctx.strokeStyle = 'rgba(124, 77, 255, 0.3)';
+                    ctx.lineWidth = 1.2;
+                    ctx.stroke();
+                }
+                for (let i = 0; i < 6; i++) {
+                    const a = (i / 6) * Math.PI * 2 + time * 0.001,
+                        r2 = 6 * 0.9;
+                    const x = ligandX + Math.cos(a) * r2,
+                        y = ligandY + Math.sin(a) * r2;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 2.5 + 0.5 * Math.sin(time * 0.003 + i), 0, Math.PI * 2);
+                    ctx.fillStyle = `hsla(${280 + i * 10}, 70%, 60%, 0.5)`;
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+
+            function drawDrug(cx, cy, size, time, alpha) {
+                const r = size * 0.35;
+                ctx.save();
+                ctx.globalAlpha = alpha * 0.4;
+                const grad = ctx.createLinearGradient(cx - r, cy, cx + r, cy);
+                grad.addColorStop(0, 'rgba(2, 136, 209, 0.15)');
+                grad.addColorStop(0.5, 'rgba(79, 195, 247, 0.25)');
+                grad.addColorStop(1, 'rgba(124, 77, 255, 0.15)');
+                ctx.beginPath();
+                ctx.roundRect(cx - r, cy - r * 0.6, r * 2, r * 1.2, r * 0.6);
+                ctx.fillStyle = grad;
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(2, 136, 209, 0.15)';
+                ctx.lineWidth = 1.2;
+                ctx.stroke();
+                for (let i = 0; i < 5; i++) {
+                    const t = (i / 5) + 0.1;
+                    const x = cx - r * 0.7 + t * r * 1.4;
+                    const y = cy + Math.sin(t * Math.PI * 4 + time * 0.001) * r * 0.3;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 2, 0, Math.PI * 2);
+                    ctx.fillStyle = `hsla(${200 + i * 15}, 80%, 60%, 0.3)`;
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+
+            function drawRoboticArm(cx, cy, size, time, alpha) {
+                const baseR = size * 0.15,
+                    armLen = size * 0.45;
+                const angle1 = Math.sin(time * 0.0007) * 0.8 + 0.3,
+                    angle2 = Math.sin(time * 0.0009 + 1) * 0.6 + 0.2;
+                ctx.save();
+                ctx.globalAlpha = alpha * 0.25;
+                ctx.translate(cx, cy);
+                ctx.beginPath();
+                ctx.arc(0, 0, baseR, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(2, 136, 209, 0.12)';
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(2, 136, 209, 0.2)';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+                const x1 = Math.cos(angle1) * armLen,
+                    y1 = Math.sin(angle1) * armLen;
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(x1, y1);
+                ctx.strokeStyle = 'rgba(2, 136, 209, 0.25)';
+                ctx.lineWidth = 4;
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(x1, y1, 4, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(79, 195, 247, 0.3)';
+                ctx.fill();
+                const x2 = x1 + Math.cos(angle1 + angle2) * armLen * 0.7,
+                    y2 = y1 + Math.sin(angle1 + angle2) * armLen * 0.7;
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.strokeStyle = 'rgba(124, 77, 255, 0.2)';
+                ctx.lineWidth = 3;
+                ctx.stroke();
+                const gripOpen = 0.5 + 0.5 * Math.sin(time * 0.002);
+                for (let s = -1; s <= 1; s += 2) {
+                    const gx = x2 + s * 6 * gripOpen,
+                        gy = y2 + 6;
+                    ctx.beginPath();
+                    ctx.moveTo(x2, y2);
+                    ctx.lineTo(gx, gy);
+                    ctx.strokeStyle = 'rgba(79, 195, 247, 0.2)';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.arc(gx, gy, 2.5, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(79, 195, 247, 0.2)';
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+
+            function drawMedicalDevice(cx, cy, size, time, alpha) {
+                const w = size * 0.7,
+                    h = size * 0.5;
+                ctx.save();
+                ctx.globalAlpha = alpha * 0.25;
+                ctx.beginPath();
+                ctx.roundRect(cx - w / 2, cy - h / 2, w, h, 6);
+                ctx.fillStyle = 'rgba(2, 136, 209, 0.05)';
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(2, 136, 209, 0.15)';
+                ctx.lineWidth = 1.2;
+                ctx.stroke();
+                const pts = [];
+                for (let i = 0; i < 40; i++) {
+                    const t = i / 40;
+                    const x = cx - w * 0.4 + t * w * 0.8;
+                    let y = 0;
+                    const phase = t * 8 + time * 0.002;
+                    if (t < 0.2) y = Math.sin(phase) * 0.3;
+                    else if (t < 0.3) y = -0.8 + Math.sin(phase) * 0.2;
+                    else if (t < 0.5) y = 0.4 + Math.sin(phase) * 0.3;
+                    else if (t < 0.7) y = -0.3 + Math.sin(phase) * 0.2;
+                    else y = Math.sin(phase) * 0.3;
+                    y = cy + y * h * 0.35;
+                    pts.push({ x, y });
+                }
+                ctx.beginPath();
+                for (let i = 0; i < pts.length; i++) {
+                    i === 0 ? ctx.moveTo(pts[i].x, pts[i].y) : ctx.lineTo(pts[i].x, pts[i].y);
+                }
+                ctx.strokeStyle = 'rgba(79, 195, 247, 0.35)';
+                ctx.lineWidth = 1.8;
+                ctx.stroke();
+                ctx.restore();
+            }
+
+            const icons = [
+                { label: '🔬', x: 0.10, y: 0.20, size: 32, speed: 0.035 },
+                { label: '🧪', x: 0.90, y: 0.25, size: 30, speed: 0.04 },
+                { label: '🧠', x: 0.06, y: 0.55, size: 30, speed: 0.03 },
+                { label: '🧬', x: 0.94, y: 0.58, size: 34, speed: 0.045 },
+                { label: '🦠', x: 0.18, y: 0.88, size: 28, speed: 0.032 },
+                { label: '🩺', x: 0.82, y: 0.85, size: 32, speed: 0.028 },
+                { label: '💊', x: 0.50, y: 0.06, size: 30, speed: 0.025 },
+                { label: '⚕️', x: 0.72, y: 0.42, size: 28, speed: 0.038 },
+            ];
+
+            const particles = [];
+            const PCOUNT = 50;
+            class Particle {
+                constructor() { this.reset(); }
+                reset() { this.x = Math.random() * W;
+                    this.y = Math.random() * H;
+                    this.size = 1.5 + Math.random() * 3.5;
+                    this.vx = (Math.random() - 0.5) * 0.3;
+                    this.vy = (Math.random() - 0.5) * 0.3;
+                    this.depth = Math.random();
+                    this.phase = Math.random() * Math.PI * 2;
+                    this.hue = 195 + Math.random() * 40; }
+                update() {
+                    this.vx += Math.sin(time * 0.0008 + this.phase) * 0.002;
+                    this.vy += Math.cos(time * 0.0007 + this.phase * 0.7) * 0.002;
+                    const dx = (mouseX * W - this.x),
+                        dy = (mouseY * H - this.y);
+                    const dist = Math.hypot(dx, dy);
+                    if (dist < 300) { const force = 0.006 * (1 - this.depth * 0.4) * (1 - dist / 300);
+                        this.vx += (dx / (dist + 1)) * force;
+                        this.vy += (dy / (dist + 1)) * force; }
+                    const maxV = 0.5 + this.depth * 0.3;
+                    const v = Math.hypot(this.vx, this.vy);
+                    if (v > maxV) { this.vx = (this.vx / v) * maxV;
+                        this.vy = (this.vy / v) * maxV; }
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x < -10) this.x = W + 10;
+                    if (this.x > W + 10) this.x = -10;
+                    if (this.y < -10) this.y = H + 10;
+                    if (this.y > H + 10) this.y = -10;
+                }
+                draw() {
+                    const size = this.size * (0.7 + this.depth * 0.5);
+                    const alpha = 0.15 + this.depth * 0.3;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, size, 0, Math.PI * 2);
+                    ctx.fillStyle = `hsla(${this.hue}, 70%, 60%, ${alpha})`;
+                    ctx.fill();
+                }
+            }
+            for (let i = 0; i < PCOUNT; i++) particles.push(new Particle());
+
+            function draw() {
+                time += 1;
+                mouseX += (targetMX - mouseX) * 0.04;
+                mouseY += (targetMY - mouseY) * 0.04;
+                ctx.clearRect(0, 0, W, H);
+                const grad = ctx.createLinearGradient(0, 0, W, H);
+                grad.addColorStop(0, '#eef4fa');
+                grad.addColorStop(0.5, '#e4edf7');
+                grad.addColorStop(1, '#dce8f4');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, W, H);
+                for (const p of particles) { p.update();
+                    p.draw(); }
+                drawSignal(W * 0.05, H * 0.38, 160, 50, time, 0.8, 'rgba(79, 195, 247, 0.5)', 'EEG', 'eeg');
+                drawSignal(W * 0.88, H * 0.60, 180, 55, time + 1, 0.7, 'rgba(124, 77, 255, 0.5)', 'EMG', 'emg');
+                drawSignal(W * 0.45, H * 0.85, 220, 60, time + 2, 0.6, 'rgba(2, 136, 209, 0.5)', 'ECG', 'ecg');
+                drawDNA(W * 0.12, H * 0.72, 110 + Math.sin(time * 0.0004) * 8, time, 0.9);
+                drawDNA(W * 0.88, H * 0.15, 85 + Math.sin(time * 0.0006 + 1) * 6, time + 2, 0.7);
+                drawProtein(W * 0.22, H * 0.28, 110, time, 0.8);
+                drawProtein(W * 0.78, H * 0.72, 90, time + 1.5, 0.6);
+                drawProtein(W * 0.45, H * 0.10, 70, time + 0.8, 0.5);
+                drawDocking(W * 0.65, H * 0.22, 95, time, 0.7);
+                drawDocking(W * 0.35, H * 0.60, 80, time + 1.2, 0.5);
+                drawDrug(W * 0.08, H * 0.45, 70, time, 0.6);
+                drawDrug(W * 0.92, H * 0.48, 65, time + 0.7, 0.5);
+                drawDrug(W * 0.55, H * 0.08, 60, time + 1.8, 0.4);
+                drawRoboticArm(W * 0.04, H * 0.88, 120, time, 0.6);
+                drawRoboticArm(W * 0.96, H * 0.92, 100, time + 0.5, 0.4);
+                drawMedicalDevice(W * 0.30, H * 0.06, 80, time, 0.5);
+                drawMedicalDevice(W * 0.75, H * 0.95, 70, time + 1.1, 0.4);
+                for (const icon of icons) {
+                    const px = icon.x * W + (mouseX - 0.5) * icon.speed * 100;
+                    const py = icon.y * H + (mouseY - 0.5) * icon.speed * 100;
+                    const size = icon.size + Math.sin(time * 0.0015 + icon.x * 8) * 3;
+                    ctx.save();
+                    ctx.globalAlpha = 0.55 + 0.15 * Math.sin(time * 0.001 + icon.x * 5);
+                    ctx.font = `${size}px "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.shadowColor = 'rgba(2, 136, 209, 0.04)';
+                    ctx.shadowBlur = 20;
+                    ctx.fillText(icon.label, px, py);
+                    ctx.shadowBlur = 0;
+                    ctx.restore();
+                }
+                const vig = ctx.createRadialGradient(W / 2, H / 2, W * 0.2, W / 2, H / 2, W * 0.9);
+                vig.addColorStop(0, 'rgba(255,255,255,0)');
+                vig.addColorStop(1, 'rgba(200, 215, 230, 0.10)');
+                ctx.fillStyle = vig;
+                ctx.fillRect(0, 0, W, H);
+                requestAnimationFrame(draw);
+            }
+            draw();
+            window.addEventListener('resize', () => { resize(); for (const p of particles) { p.x = Math.min(p.x, W);
+                    p.y = Math.min(p.y, H); } });
+            if (!CanvasRenderingContext2D.prototype.roundRect) {
+                CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+                    if (r > w / 2) r = w / 2;
+                    if (r > h / 2) r = h / 2;
+                    this.moveTo(x + r, y);
+                    this.lineTo(x + w - r, y);
+                    this.quadraticCurveTo(x + w, y, x + w, y + r);
+                    this.lineTo(x + w, y + h - r);
+                    this.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+                    this.lineTo(x + r, y + h);
+                    this.quadraticCurveTo(x, y + h, x, y + h - r);
+                    this.lineTo(x, y + r);
+                    this.quadraticCurveTo(x, y, x + r, y);
+                    return this;
+                };
+            }
+        })();
+    </script>
+
+    <!-- 2. FULL-SCREEN IMAGE LIGHTBOX (clean rewrite) -->
+    <script>
+        (function() {
+            'use strict';
+
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            const modalCaption = document.getElementById('modalCaption');
+            const modalCounter = document.getElementById('modalCounter');
+            const closeBtn = document.getElementById('modalClose');
+            const prevBtn = document.getElementById('modalPrev');
+            const nextBtn = document.getElementById('modalNext');
+
+            // ----- State -----
+            let imageSources = []; // array of { src, caption, element? }
+            let currentIndex = 0;
+            let isOpen = false;
+
+            // ----- Collect all clickable images -----
+            function collectImages() {
+                const items = [];
+                // Look for images inside .project-img, .thesis-img, .web-img, .img-item
+                const containers = document.querySelectorAll('.project-img, .thesis-img, .web-img, .img-item');
+                containers.forEach(container => {
+                    const img = container.querySelector('img');
+                    if (!img) return;
+                    // If container has data-img, use that as source (higher res)
+                    let src = container.dataset.img || img.src;
+                    // If src is relative, make it absolute
+                    if (src && !src.startsWith('http') && !src.startsWith('data:')) {
+                        src = src;
+                    }
+                    let caption = '';
+                    const capEl = container.querySelector('.caption');
+                    if (capEl) caption = capEl.textContent.trim();
+                    if (!caption) caption = img.alt || '';
+                    items.push({
+                        src: src,
+                        caption: caption,
+                        element: img,
+                        container: container
+                    });
+                });
+
+                // Also collect images inside .web-card .web-img that might not have .img-item
+                document.querySelectorAll('.web-card .web-img').forEach(container => {
+                    const img = container.querySelector('img');
+                    if (!img) return;
+                    // Check if already included via .web-img selector above
+                    const already = items.some(item => item.element === img);
+                    if (already) return;
+                    let src = container.dataset.img || img.src;
+                    let caption = img.alt || '';
+                    items.push({
+                        src: src,
+                        caption: caption,
+                        element: img,
+                        container: container
+                    });
+                });
+
+                // Also collect images inside .project-img, .thesis-img directly (if not already)
+                document.querySelectorAll('.project-img, .thesis-img').forEach(container => {
+                    const img = container.querySelector('img');
+                    if (!img) return;
+                    const already = items.some(item => item.element === img);
+                    if (already) return;
+                    let src = container.dataset.img || img.src;
+                    let caption = img.alt || '';
+                    items.push({
+                        src: src,
+                        caption: caption,
+                        element: img,
+                        container: container
+                    });
+                });
+
+                // Remove duplicates by src
+                const seen = new Set();
+                const unique = [];
+                for (const item of items) {
+                    if (!seen.has(item.src)) {
+                        seen.add(item.src);
+                        unique.push(item);
+                    }
+                }
+                return unique;
+            }
+
+            // ----- Rebuild image list on DOM changes -----
+            function rebuildImageList() {
+                imageSources = collectImages();
+            }
+
+            // ----- Open modal with a specific image source -----
+            function openModalBySrc(src, caption) {
+                rebuildImageList();
+                // Find index by src
+                let idx = -1;
+                for (let i = 0; i < imageSources.length; i++) {
+                    if (imageSources[i].src === src) {
+                        idx = i;
+                        break;
+                    }
+                }
+                if (idx === -1) {
+                    // Not found, add it
+                    imageSources.push({ src: src, caption: caption || '' });
+                    idx = imageSources.length - 1;
+                }
+                currentIndex = idx;
+                showImage(currentIndex);
+                modal.classList.add('active');
+                isOpen = true;
+                document.body.style.overflow = 'hidden';
+            }
+
+            // ----- Open modal from an image element -----
+            function openModalFromImage(img) {
+                if (!img) return;
+                rebuildImageList();
+                // Try to find this image in the list by element reference or src
+                let idx = -1;
+                for (let i = 0; i < imageSources.length; i++) {
+                    if (imageSources[i].element === img) {
+                        idx = i;
+                        break;
+                    }
+                    if (imageSources[i].src === img.src) {
+                        idx = i;
+                        break;
+                    }
+                }
+                if (idx === -1) {
+                    // Check if container has data-img
+                    const container = img.closest('.project-img, .thesis-img, .web-img, .img-item');
+                    if (container) {
+                        const dataSrc = container.dataset.img;
+                        if (dataSrc) {
+                            // Try to find by data-img
+                            for (let i = 0; i < imageSources.length; i++) {
+                                if (imageSources[i].src === dataSrc) {
+                                    idx = i;
+                                    break;
+                                }
+                            }
+                            if (idx === -1) {
+                                // Add it
+                                let caption = '';
+                                const capEl = container.querySelector('.caption');
+                                if (capEl) caption = capEl.textContent.trim();
+                                if (!caption) caption = img.alt || '';
+                                imageSources.push({ src: dataSrc, caption: caption, element: img, container: container });
+                                idx = imageSources.length - 1;
+                            }
+                        }
+                    }
+                }
+                if (idx === -1) {
+                    // Fallback: add the image
+                    let caption = img.alt || '';
+                    imageSources.push({ src: img.src, caption: caption, element: img });
+                    idx = imageSources.length - 1;
+                }
+                currentIndex = idx;
+                showImage(currentIndex);
+                modal.classList.add('active');
+                isOpen = true;
+                document.body.style.overflow = 'hidden';
+            }
+
+            // ----- Show image at index -----
+            function showImage(index) {
+                if (index < 0 || index >= imageSources.length) return;
+                const item = imageSources[index];
+                if (!item) return;
+                modalImg.src = item.src;
+                modalImg.alt = item.caption || '';
+                modalCaption.textContent = item.caption || '';
+                modalCounter.textContent = `${index + 1} / ${imageSources.length}`;
+            }
+
+            // ----- Close modal -----
+            function closeModal() {
+                modal.classList.remove('active');
+                isOpen = false;
+                document.body.style.overflow = 'auto';
+            }
+
+            // ----- Navigation -----
+            function prevImage() {
+                if (imageSources.length === 0) return;
+                currentIndex = (currentIndex - 1 + imageSources.length) % imageSources.length;
+                showImage(currentIndex);
+            }
+
+            function nextImage() {
+                if (imageSources.length === 0) return;
+                currentIndex = (currentIndex + 1) % imageSources.length;
+                showImage(currentIndex);
+            }
+
+            // ----- Setup click listeners on images -----
+            function setupListeners() {
+                // Remove old listeners
+                document.querySelectorAll('.img-clickable').forEach(el => {
+                    el.removeEventListener('click', imageClickHandler);
+                    el.classList.remove('img-clickable');
+                });
+
+                // Add listeners to all clickable images
+                const allImgs = document.querySelectorAll('img:not(.hero-avatar img):not(.image-modal img)');
+                allImgs.forEach(img => {
+                    // Check if it's in a clickable area
+                    const inArea = img.closest('.project-img, .thesis-img, .web-img, .img-item, .project-card, .thesis-card, .web-card');
+                    if (inArea) {
+                        img.classList.add('img-clickable');
+                        img.style.cursor = 'pointer';
+                        img.addEventListener('click', imageClickHandler);
+                    }
+                });
+            }
+
+            // ----- Click handler -----
+            function imageClickHandler(e) {
+                e.stopPropagation();
+                const img = e.currentTarget;
+                // Check if container has data-img
+                const container = img.closest('.project-img, .thesis-img, .web-img, .img-item');
+                if (container) {
+                    const dataSrc = container.dataset.img;
+                    if (dataSrc) {
+                        let caption = '';
+                        const capEl = container.querySelector('.caption');
+                        if (capEl) caption = capEl.textContent.trim();
+                        if (!caption) caption = img.alt || '';
+                        openModalBySrc(dataSrc, caption);
+                        return;
+                    }
+                }
+                // Fallback: use the image itself
+                openModalFromImage(img);
+            }
+
+            // ----- Keyboard shortcuts -----
+            document.addEventListener('keydown', function(e) {
+                if (!isOpen) return;
+                if (e.key === 'Escape') { closeModal();
+                    e.preventDefault(); }
+                if (e.key === 'ArrowLeft') { prevImage();
+                    e.preventDefault(); }
+                if (e.key === 'ArrowRight') { nextImage();
+                    e.preventDefault(); }
+            });
+
+            // ----- Modal controls -----
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) closeModal();
+            });
+            prevBtn.addEventListener('click', function(e) { e.stopPropagation();
+                prevImage(); });
+            nextBtn.addEventListener('click', function(e) { e.stopPropagation();
+                nextImage(); });
+
+            // ----- Rebuild on DOM changes (expanded content) -----
+            const observer = new MutationObserver(() => {
+                rebuildImageList();
+                setupListeners();
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+
+            // ----- Init -----
+            document.addEventListener('DOMContentLoaded', function() {
+                rebuildImageList();
+                setupListeners();
+            });
+            // Also run after a delay
+            setTimeout(() => { rebuildImageList();
+                setupListeners(); }, 500);
+            setTimeout(() => { rebuildImageList();
+                setupListeners(); }, 1200);
+
+            // Expose for debugging
+            window.__lightbox = { openModalBySrc, openModalFromImage, closeModal, rebuildImageList, setupListeners };
+
+        })();
+    </script>
+
+    <!-- 3. EXPAND / COLLAPSE THESIS & PROJECTS -->
+    <script>
+        (function() {
+            // ----- Thesis expand -----
+            const thesisCard = document.getElementById('thesisCard');
+            const thesisToggle = document.getElementById('thesisToggle');
+            const thesisExpand = document.getElementById('thesisExpand');
+
+            if (thesisCard && thesisToggle) {
+                thesisCard.addEventListener('click', function(e) {
+                    if (e.target.closest('a')) return;
+                    if (e.target.closest('.thesis-img') && !e.target.closest('.expand-toggle')) return;
+                    if (e.target.closest('.expanded-images .img-item')) return;
+                    if (e.target.closest('.click-hint')) return;
+
+                    const isExpanded = this.classList.contains('expanded');
+                    if (isExpanded) {
+                        this.classList.remove('expanded');
+                        thesisToggle.innerHTML = 'View Details <i class="fas fa-chevron-down"></i>';
+                    } else {
+                        this.classList.add('expanded');
+                        thesisToggle.innerHTML = 'Hide Details <i class="fas fa-chevron-up"></i>';
+                        setTimeout(() => {
+                            const rect = this.getBoundingClientRect();
+                            if (rect.top < 0 || rect.bottom > window.innerHeight) {
+                                this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }
+                            // Rebuild lightbox after expansion
+                            if (window.__lightbox) {
+                                window.__lightbox.rebuildImageList();
+                                window.__lightbox.setupListeners();
+                            }
+                        }, 100);
+                    }
+                });
+            }
+
+            // ----- Projects expand -----
+            document.querySelectorAll('.project-card').forEach(card => {
+                const toggle = card.querySelector('.expand-toggle');
+                if (!toggle) return;
+
+                card.addEventListener('click', function(e) {
+                    if (e.target.closest('a')) return;
+                    if (e.target.closest('.project-img') && !e.target.closest('.expand-toggle')) return;
+                    if (e.target.closest('.expanded-images .img-item')) return;
+                    if (e.target.closest('.click-hint')) return;
+
+                    const isExpanded = this.classList.contains('expanded');
+
+                    // Close other expanded cards
+                    document.querySelectorAll('.project-card.expanded').forEach(c => {
+                        if (c !== this) {
+                            c.classList.remove('expanded');
+                            const t = c.querySelector('.expand-toggle');
+                            if (t) t.innerHTML = 'View Details <i class="fas fa-chevron-down"></i>';
+                        }
+                    });
+
+                    if (isExpanded) {
+                        this.classList.remove('expanded');
+                        toggle.innerHTML = 'View Details <i class="fas fa-chevron-down"></i>';
+                    } else {
+                        this.classList.add('expanded');
+                        toggle.innerHTML = 'Hide Details <i class="fas fa-chevron-up"></i>';
+                        setTimeout(() => {
+                            const rect = this.getBoundingClientRect();
+                            if (rect.top < 0 || rect.bottom > window.innerHeight) {
+                                this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }
+                            if (window.__lightbox) {
+                                window.__lightbox.rebuildImageList();
+                                window.__lightbox.setupListeners();
+                            }
+                        }, 100);
+                    }
+                });
+            });
+
+            // Close expanded cards when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.project-card') && !e.target.closest('.thesis-card')) {
+                    document.querySelectorAll('.project-card.expanded').forEach(c => {
+                        c.classList.remove('expanded');
+                        const t = c.querySelector('.expand-toggle');
+                        if (t) t.innerHTML = 'View Details <i class="fas fa-chevron-down"></i>';
+                    });
+                    if (thesisCard && thesisCard.classList.contains('expanded')) {
+                        thesisCard.classList.remove('expanded');
+                        thesisToggle.innerHTML = 'View Details <i class="fas fa-chevron-down"></i>';
+                    }
+                }
+            });
+        })();
+    </script>
+
+    <!-- 4. NAV / SCROLL / ANIMATIONS -->
+    <script>
+        (function() {
+            // Hamburger
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('open');
+            });
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('open');
+                });
+            });
+
+            // Navbar scroll
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                navbar.style.background = 'rgba(10, 22, 40, 0.88)';
+            });
+
+            // Intersection Observer for sections
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.section-padding').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(24px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(section);
+            });
+
+            // Observer for cards
+            document.querySelectorAll('.project-card, .web-card, .edu-item, .exp-item, .lead-card, .award-item, .contact-item, .ref-card, .skill-category')
+                .forEach(el => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(20px)';
+                    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    const obs = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.style.opacity = '1';
+                                entry.target.style.transform = 'translateY(0)';
+                            }
+                        });
+                    }, { threshold: 0.05 });
+                    obs.observe(el);
+                });
+
+            window.addEventListener('load', () => {
+                document.querySelectorAll('.section-padding').forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight) {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }
+                });
+                // Rebuild lightbox after load
+                if (window.__lightbox) {
+                    setTimeout(() => {
+                        window.__lightbox.rebuildImageList();
+                        window.__lightbox.setupListeners();
+                    }, 300);
+                }
+            });
+        })();
+    </script>
+
+</body>
+</html>
