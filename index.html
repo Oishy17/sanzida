@@ -377,6 +377,8 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.4s ease;
+            pointer-events: none;
+            /* prevent direct click on img, container handles it */;
         }
         .thesis-img:hover img {
             transform: scale(1.02);
@@ -646,7 +648,8 @@
             width: 100%;
             height: 160px;
             object-fit: cover;
-            /* pointer-events: none; removed to allow click on image */
+            pointer-events: none;
+            /* container handles click */
         }
         .expanded-images .img-item .caption {
             padding: 10px 14px;
@@ -1492,7 +1495,6 @@
                     <a href="https://github.com/Oishy17" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
                     <a href="https://www.linkedin.com/in/sanzida-afrin-4a0861250/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     <a href="mailto:sanzidaoishy@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                    <a href="#" aria-label="Phone"><i class="fas fa-phone"></i></a>
                 </div>
             </div>
             <div class="hero-image">
@@ -1515,7 +1517,6 @@
                     <p>I am passionate about applying engineering principles to develop innovative healthcare solutions and continuously improving my technical and research skills.</p>
                 </div>
                 <div class="about-info-grid">
-                    <div class="about-info-item"><span class="label">Phone</span><span class="value">: 01613077733</span></div>
                     <div class="about-info-item"><span class="label">Email</span><span class="value"><a href="mailto:sanzidaoishy@gmail.com" style="color:#1e3a5f;">: sanzidaoishy@gmail.com</a></span></div>
                     <div class="about-info-item"><span class="label">GitHub</span><span class="value"><a href="https://github.com/Oishy17" target="_blank" style="color:#1e3a5f;">: github.com/Oishy17</a></span></div>
                     <div class="about-info-item"><span class="label">LinkedIn</span><span class="value"><a href="https://www.linkedin.com/in/sanzida-afrin-4a0861250/" target="_blank" style="color:#1e3a5f;">: Sanzida Afrin</a></span></div>
@@ -1727,7 +1728,7 @@
                                 <p><strong>Tools &amp; Techniques:</strong> ESP32 microcontroller, EMG sensors, Arduino ecosystem, web interface (HTML/CSS/JS).</p>
                             </div>
                             <div class="expanded-images">
-                                <div class="img-item" data-img="images/project4a.png"><img src="images/project4a.png" alt="Robotic Arm - Hardware Setup" /><div class="caption">HWeb-based remote control interface</div></div>
+                                <div class="img-item" data-img="images/project4a.png"><img src="images/project4a.png" alt="Robotic Arm - Hardware Setup" /><div class="caption">Web-based remote control interface</div></div>
                                 <div class="img-item" data-img="images/project4b.png"><img src="images/project4b.png" alt="Robotic Arm - EMG Control" /><div class="caption">EMG signal</div></div>
                                 <div class="img-item" data-img="images/project4c.png"><img src="images/project4c.png" alt="Robotic Arm - Web Interface" /><div class="caption">Controller app</div></div>
                                 <div class="img-item" data-img="images/project4d.png"><img src="images/project4d.png" alt="Robotic Arm - Final Prototype" /><div class="caption">Welcome interface</div></div>
@@ -1915,11 +1916,10 @@
             <p class="section-subtitle">Let's connect and collaborate on healthcare innovation.</p>
             <div class="contact-wrapper">
                 <div class="contact-info">
-                    <div class="contact-item"><div class="ci-icon"><i class="fas fa-phone-alt"></i></div><div class="ci-text"><span class="label">Phone:</span> 01613077733</div></div>
                     <div class="contact-item"><div class="ci-icon"><i class="fas fa-envelope"></i></div><div class="ci-text"><span class="label">Email:</span> <a href="mailto:sanzidaoishy@gmail.com">sanzidaoishy@gmail.com</a></div></div>
                     <div class="contact-item"><div class="ci-icon"><i class="fab fa-github"></i></div><div class="ci-text"><span class="label">GitHub:</span> <a href="https://github.com/Oishy17" target="_blank">github.com/Oishy17</a></div></div>
                     <div class="contact-item"><div class="ci-icon"><i class="fab fa-linkedin-in"></i></div><div class="ci-text"><span class="label">LinkedIn:</span> <a href="https://www.linkedin.com/in/sanzida-afrin-4a0861250/" target="_blank">Sanzida Afrin</a></div></div>
-                    <div class="contact-social"><a href="https://github.com/Oishy17" target="_blank"><i class="fab fa-github"></i></a><a href="https://www.linkedin.com/in/sanzida-afrin-4a0861250/" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="mailto:sanzidaoishy@gmail.com"><i class="fas fa-envelope"></i></a><a href="#"><i class="fas fa-phone"></i></a></div>
+                    <div class="contact-social"><a href="https://github.com/Oishy17" target="_blank"><i class="fab fa-github"></i></a><a href="https://www.linkedin.com/in/sanzida-afrin-4a0861250/" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="mailto:sanzidaoishy@gmail.com"><i class="fas fa-envelope"></i></a></div>
                     <div style="margin-top:8px; font-size:0.85rem; color:#2a3a4e;"><i class="fas fa-globe" style="color:#0288d1;"></i> Languages: Bengali (Native) • English (Professional)</div>
                 </div>
                 <div class="contact-refs">
@@ -2389,7 +2389,7 @@
         })();
     </script>
 
-    <!-- 2. FULL-SCREEN IMAGE LIGHTBOX (clean rewrite) -->
+    <!-- 2. LIGHTBOX — event delegation for all images (robust) -->
     <script>
         (function() {
             'use strict';
@@ -2403,21 +2403,21 @@
             const nextBtn = document.getElementById('modalNext');
 
             // ----- State -----
-            let imageSources = []; // array of { src, caption, element? }
+            let imageItems = [];
             let currentIndex = 0;
             let isOpen = false;
 
-            // ----- Collect all clickable images -----
-            function collectImages() {
+            // ----- Collect all clickable image sources from the DOM -----
+            function collectImageItems() {
                 const items = [];
-                // Look for images inside .project-img, .thesis-img, .web-img, .img-item
-                const containers = document.querySelectorAll('.project-img, .thesis-img, .web-img, .img-item');
+                const containers = document.querySelectorAll(
+                    '.project-img, .thesis-img, .web-img, .img-item'
+                );
                 containers.forEach(container => {
                     const img = container.querySelector('img');
                     if (!img) return;
-                    // If container has data-img, use that as source (higher res)
                     let src = container.dataset.img || img.src;
-                    // If src is relative, make it absolute
+                    // make relative paths absolute
                     if (src && !src.startsWith('http') && !src.startsWith('data:')) {
                         src = src;
                     }
@@ -2425,45 +2425,18 @@
                     const capEl = container.querySelector('.caption');
                     if (capEl) caption = capEl.textContent.trim();
                     if (!caption) caption = img.alt || '';
-                    items.push({
-                        src: src,
-                        caption: caption,
-                        element: img,
-                        container: container
-                    });
+                    items.push({ src, caption, container });
                 });
 
-                // Also collect images inside .web-card .web-img that might not have .img-item
-                document.querySelectorAll('.web-card .web-img').forEach(container => {
+                // Also catch any direct images inside project/thesis bodies not already covered
+                document.querySelectorAll('.project-card .project-img, .thesis-card .thesis-img').forEach(container => {
                     const img = container.querySelector('img');
                     if (!img) return;
-                    // Check if already included via .web-img selector above
-                    const already = items.some(item => item.element === img);
+                    const already = items.some(i => i.container === container);
                     if (already) return;
                     let src = container.dataset.img || img.src;
                     let caption = img.alt || '';
-                    items.push({
-                        src: src,
-                        caption: caption,
-                        element: img,
-                        container: container
-                    });
-                });
-
-                // Also collect images inside .project-img, .thesis-img directly (if not already)
-                document.querySelectorAll('.project-img, .thesis-img').forEach(container => {
-                    const img = container.querySelector('img');
-                    if (!img) return;
-                    const already = items.some(item => item.element === img);
-                    if (already) return;
-                    let src = container.dataset.img || img.src;
-                    let caption = img.alt || '';
-                    items.push({
-                        src: src,
-                        caption: caption,
-                        element: img,
-                        container: container
-                    });
+                    items.push({ src, caption, container });
                 });
 
                 // Remove duplicates by src
@@ -2478,26 +2451,17 @@
                 return unique;
             }
 
-            // ----- Rebuild image list on DOM changes -----
-            function rebuildImageList() {
-                imageSources = collectImages();
+            function refreshItems() {
+                imageItems = collectImageItems();
             }
 
-            // ----- Open modal with a specific image source -----
-            function openModalBySrc(src, caption) {
-                rebuildImageList();
-                // Find index by src
-                let idx = -1;
-                for (let i = 0; i < imageSources.length; i++) {
-                    if (imageSources[i].src === src) {
-                        idx = i;
-                        break;
-                    }
-                }
+            // ----- Open modal for a specific src -----
+            function openModal(src, caption) {
+                refreshItems();
+                let idx = imageItems.findIndex(item => item.src === src);
                 if (idx === -1) {
-                    // Not found, add it
-                    imageSources.push({ src: src, caption: caption || '' });
-                    idx = imageSources.length - 1;
+                    imageItems.push({ src, caption: caption || '' });
+                    idx = imageItems.length - 1;
                 }
                 currentIndex = idx;
                 showImage(currentIndex);
@@ -2506,132 +2470,93 @@
                 document.body.style.overflow = 'hidden';
             }
 
-            // ----- Open modal from an image element -----
-            function openModalFromImage(img) {
-                if (!img) return;
-                rebuildImageList();
-                // Try to find this image in the list by element reference or src
-                let idx = -1;
-                for (let i = 0; i < imageSources.length; i++) {
-                    if (imageSources[i].element === img) {
-                        idx = i;
-                        break;
-                    }
-                    if (imageSources[i].src === img.src) {
-                        idx = i;
-                        break;
-                    }
-                }
-                if (idx === -1) {
-                    // Check if container has data-img
-                    const container = img.closest('.project-img, .thesis-img, .web-img, .img-item');
-                    if (container) {
-                        const dataSrc = container.dataset.img;
-                        if (dataSrc) {
-                            // Try to find by data-img
-                            for (let i = 0; i < imageSources.length; i++) {
-                                if (imageSources[i].src === dataSrc) {
-                                    idx = i;
-                                    break;
-                                }
-                            }
-                            if (idx === -1) {
-                                // Add it
-                                let caption = '';
-                                const capEl = container.querySelector('.caption');
-                                if (capEl) caption = capEl.textContent.trim();
-                                if (!caption) caption = img.alt || '';
-                                imageSources.push({ src: dataSrc, caption: caption, element: img, container: container });
-                                idx = imageSources.length - 1;
-                            }
-                        }
-                    }
-                }
-                if (idx === -1) {
-                    // Fallback: add the image
-                    let caption = img.alt || '';
-                    imageSources.push({ src: img.src, caption: caption, element: img });
-                    idx = imageSources.length - 1;
-                }
-                currentIndex = idx;
-                showImage(currentIndex);
-                modal.classList.add('active');
-                isOpen = true;
-                document.body.style.overflow = 'hidden';
-            }
-
-            // ----- Show image at index -----
             function showImage(index) {
-                if (index < 0 || index >= imageSources.length) return;
-                const item = imageSources[index];
+                if (index < 0 || index >= imageItems.length) return;
+                const item = imageItems[index];
                 if (!item) return;
                 modalImg.src = item.src;
                 modalImg.alt = item.caption || '';
                 modalCaption.textContent = item.caption || '';
-                modalCounter.textContent = `${index + 1} / ${imageSources.length}`;
+                modalCounter.textContent = `${index + 1} / ${imageItems.length}`;
             }
 
-            // ----- Close modal -----
             function closeModal() {
                 modal.classList.remove('active');
                 isOpen = false;
                 document.body.style.overflow = 'auto';
             }
 
-            // ----- Navigation -----
             function prevImage() {
-                if (imageSources.length === 0) return;
-                currentIndex = (currentIndex - 1 + imageSources.length) % imageSources.length;
+                if (imageItems.length === 0) return;
+                currentIndex = (currentIndex - 1 + imageItems.length) % imageItems.length;
                 showImage(currentIndex);
             }
 
             function nextImage() {
-                if (imageSources.length === 0) return;
-                currentIndex = (currentIndex + 1) % imageSources.length;
+                if (imageItems.length === 0) return;
+                currentIndex = (currentIndex + 1) % imageItems.length;
                 showImage(currentIndex);
             }
 
-            // ----- Setup click listeners on images -----
-            function setupListeners() {
-                // Remove old listeners
-                document.querySelectorAll('.img-clickable').forEach(el => {
-                    el.removeEventListener('click', imageClickHandler);
-                    el.classList.remove('img-clickable');
-                });
+            // ----- Event delegation on document -----
+            document.addEventListener('click', function(e) {
+                // Find the nearest image or container
+                let target = e.target;
+                let img = null;
+                let container = null;
 
-                // Add listeners to all clickable images
-                const allImgs = document.querySelectorAll('img:not(.hero-avatar img):not(.image-modal img)');
-                allImgs.forEach(img => {
-                    // Check if it's in a clickable area
-                    const inArea = img.closest('.project-img, .thesis-img, .web-img, .img-item, .project-card, .thesis-card, .web-card');
-                    if (inArea) {
-                        img.classList.add('img-clickable');
-                        img.style.cursor = 'pointer';
-                        img.addEventListener('click', imageClickHandler);
+                // If clicked directly on an image inside a clickable container
+                if (target.tagName === 'IMG') {
+                    img = target;
+                    container = img.closest('.project-img, .thesis-img, .web-img, .img-item');
+                    if (!container) {
+                        // also check if it's inside .expanded-images .img-item
+                        container = img.closest('.img-item');
                     }
-                });
-            }
-
-            // ----- Click handler -----
-            function imageClickHandler(e) {
-                e.stopPropagation();
-                const img = e.currentTarget;
-                // Check if container has data-img
-                const container = img.closest('.project-img, .thesis-img, .web-img, .img-item');
-                if (container) {
-                    const dataSrc = container.dataset.img;
-                    if (dataSrc) {
-                        let caption = '';
-                        const capEl = container.querySelector('.caption');
-                        if (capEl) caption = capEl.textContent.trim();
-                        if (!caption) caption = img.alt || '';
-                        openModalBySrc(dataSrc, caption);
-                        return;
+                    // If the image is inside a project-card but not in a specific container, use the project-img
+                    if (!container) {
+                        const parentCard = img.closest('.project-card, .thesis-card');
+                        if (parentCard) {
+                            container = parentCard.querySelector('.project-img, .thesis-img');
+                            if (container && container.querySelector('img') !== img) container = null;
+                        }
+                    }
+                } else {
+                    // Clicked on container itself (e.g. .img-item div)
+                    container = target.closest('.project-img, .thesis-img, .web-img, .img-item');
+                    if (container) {
+                        img = container.querySelector('img');
                     }
                 }
-                // Fallback: use the image itself
-                openModalFromImage(img);
-            }
+
+                if (!img && container) {
+                    img = container.querySelector('img');
+                }
+                if (!img) return;
+
+                // If click is on a click-hint or expand-toggle, ignore
+                if (e.target.closest('.click-hint')) return;
+                if (e.target.closest('.expand-toggle')) return;
+                if (e.target.closest('a')) return;
+
+                // Get source and caption
+                let src = container ? (container.dataset.img || img.src) : img.src;
+                let caption = '';
+                if (container) {
+                    const capEl = container.querySelector('.caption');
+                    if (capEl) caption = capEl.textContent.trim();
+                }
+                if (!caption) caption = img.alt || '';
+
+                // Make sure src is valid
+                if (!src || src === '#') return;
+                // Skip if it's a placeholder or broken
+                if (src.includes('placeholder')) return;
+
+                e.preventDefault();
+                e.stopPropagation();
+                openModal(src, caption);
+            });
 
             // ----- Keyboard shortcuts -----
             document.addEventListener('keydown', function(e) {
@@ -2654,26 +2579,19 @@
             nextBtn.addEventListener('click', function(e) { e.stopPropagation();
                 nextImage(); });
 
-            // ----- Rebuild on DOM changes (expanded content) -----
-            const observer = new MutationObserver(() => {
-                rebuildImageList();
-                setupListeners();
-            });
+            // ----- Refresh when content changes (expanded cards) -----
+            const observer = new MutationObserver(() => { refreshItems(); });
             observer.observe(document.body, { childList: true, subtree: true });
 
             // ----- Init -----
             document.addEventListener('DOMContentLoaded', function() {
-                rebuildImageList();
-                setupListeners();
+                refreshItems();
             });
-            // Also run after a delay
-            setTimeout(() => { rebuildImageList();
-                setupListeners(); }, 500);
-            setTimeout(() => { rebuildImageList();
-                setupListeners(); }, 1200);
+            setTimeout(refreshItems, 500);
+            setTimeout(refreshItems, 1200);
 
-            // Expose for debugging
-            window.__lightbox = { openModalBySrc, openModalFromImage, closeModal, rebuildImageList, setupListeners };
+            // Expose for debugging / manual refresh
+            window.__lightbox = { openModal, closeModal, refreshItems, prevImage, nextImage };
 
         })();
     </script>
@@ -2705,11 +2623,7 @@
                             if (rect.top < 0 || rect.bottom > window.innerHeight) {
                                 this.scrollIntoView({ behavior: 'smooth', block: 'center' });
                             }
-                            // Rebuild lightbox after expansion
-                            if (window.__lightbox) {
-                                window.__lightbox.rebuildImageList();
-                                window.__lightbox.setupListeners();
-                            }
+                            if (window.__lightbox) window.__lightbox.refreshItems();
                         }, 100);
                     }
                 });
@@ -2748,10 +2662,7 @@
                             if (rect.top < 0 || rect.bottom > window.innerHeight) {
                                 this.scrollIntoView({ behavior: 'smooth', block: 'center' });
                             }
-                            if (window.__lightbox) {
-                                window.__lightbox.rebuildImageList();
-                                window.__lightbox.setupListeners();
-                            }
+                            if (window.__lightbox) window.__lightbox.refreshItems();
                         }, 100);
                     }
                 });
@@ -2839,12 +2750,8 @@
                         el.style.transform = 'translateY(0)';
                     }
                 });
-                // Rebuild lightbox after load
                 if (window.__lightbox) {
-                    setTimeout(() => {
-                        window.__lightbox.rebuildImageList();
-                        window.__lightbox.setupListeners();
-                    }, 300);
+                    setTimeout(() => window.__lightbox.refreshItems(), 300);
                 }
             });
         })();
