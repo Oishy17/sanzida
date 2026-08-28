@@ -1102,6 +1102,30 @@
             .web-img { height: 220px; }
         }
     </style>
+
+<!-- ============================================================
+     LAYOUT TWEAKS — appended block. The original stylesheet above is
+     completely untouched. Delete this whole block to revert.
+     ============================================================ -->
+<style>
+    /* Projects: cap at 3 cards per row on desktop, matching Web Projects */
+    @media (min-width: 1025px) {
+        .projects-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    /* Page gutters — original was 5px, which ran content to the screen edge */
+    .container { padding-left: 32px; padding-right: 32px; }
+    @media (max-width: 1024px) { .container { padding-left: 24px; padding-right: 24px; } }
+    @media (max-width: 768px)  { .container { padding-left: 18px; padding-right: 18px; } }
+
+    /* Nav bar keeps its own tighter gutter feel */
+    nav .container { padding-left: 24px; padding-right: 24px; }
+    @media (max-width: 768px) { nav .container { padding-left: 18px; padding-right: 18px; } }
+
+    /* Academic References: a little more air between the three entries */
+    .ref-block .ref-body + .ref-body { padding-top: 18px; }
+    .ref-block .ref-body { padding-bottom: 18px; }
+</style>
 </head>
 <body>
 
