@@ -43,6 +43,10 @@
             --review-bg:  #FFF1D0;
             --prep-fg:    #1F4E79;   /* "in preparation" status */
             --prep-bg:    #E6F0FB;
+            --ok-fg:      #1B5E3A;   /* "accepted" status and recognitions */
+            --ok-bg:      #DDF3E4;
+            --patent-fg:  #4A2F7A;   /* patents */
+            --patent-bg:  #ECE4F8;
 
             --serif: 'DM Serif Display', Georgia, 'Times New Roman', serif;
             --sans:  'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -204,6 +208,8 @@
         .status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
         .status.review { color: var(--review-fg); background: var(--review-bg); }
         .status.prep   { color: var(--prep-fg);   background: var(--prep-bg); }
+        .status.ok     { color: var(--ok-fg);     background: var(--ok-bg); }
+        .status.patent { color: var(--patent-fg); background: var(--patent-bg); }
 
         /* About */
         .about-grid { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 48px; align-items: start; }
@@ -219,6 +225,7 @@
         .pub { padding: 20px 24px 22px; border-radius: var(--radius); }
         .pub + .pub { margin-top: 14px; }
         .pub h4 { font-size: 1.1rem; font-weight: 600; line-height: 1.4; color: var(--ink); max-width: 62ch; }
+        .pub .authors { margin-top: 4px; font-size: .9rem; color: var(--text); max-width: 68ch; }
         .pub .meta { margin-top: 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: .88rem; color: var(--muted); }
         .pub .desc { margin-top: 8px; max-width: 68ch; font-size: .95rem; }
         .pub .more { margin-top: 8px; font-size: .88rem; font-weight: 600; display: inline-block; }
@@ -321,6 +328,11 @@
         .row .chips { margin-top: 10px; }
         .row.skill { align-items: start; }
         .row.skill .when { color: var(--ink); font-weight: 700; font-size: .95rem; padding-top: 3px; }
+
+        .award-photo { margin-top: 12px; max-width: 480px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--glass-edge); background: rgba(255,255,255,.55); }
+        .award-photo button { display: block; width: 100%; cursor: zoom-in; }
+        .award-photo img { width: 100%; height: auto; }
+        .award-photo figcaption { padding: 8px 12px 10px; font-size: .8rem; line-height: 1.4; color: var(--muted); border-top: 1px solid var(--line); }
 
         /* ===== 10. CONTACT ===== */
         .contact-grid { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 48px; align-items: start; }
@@ -473,8 +485,8 @@
         <ul class="nav-links" id="navLinks">
             <li><a href="#about">About</a></li>
             <li><a href="#education">Education</a></li>
-            <li><a href="#publications">Publications</a></li>
             <li><a href="#research">Research</a></li>
+            <li><a href="#publications">Publications</a></li>
             <li><a href="#webprojects">Web apps</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#skills">Skills</a></li>
@@ -513,8 +525,8 @@
 
         <dl class="facts">
             <div><dt>CGPA out of 4.00, B.Sc. in BME</dt><dd>3.66</dd></div>
-            <div><dt>Papers under review</dt><dd>2</dd></div>
-            <div><dt>Research projects</dt><dd>8</dd></div>
+            <div><dt>Papers accepted or in review</dt><dd>5</dd></div>
+            <div><dt>Research projects</dt><dd>11</dd></div>
             <div><dt>Web apps built</dt><dd>8</dd></div>
         </dl>
     </div>
@@ -595,65 +607,9 @@
 </section>
 
 <!-- ============================================================
-     PUBLICATIONS
-     To add a paper: copy one <article class="pub"> block into the
-     right group and update the count in the group heading.
-     When a paper is accepted, add a "Published" group above these.
-     ============================================================ -->
-<section class="section" id="publications">
-    <div class="wrap split">
-        <div class="rail">
-            <h2>Publications</h2>
-            <p>Manuscripts currently in peer review or being written up.</p>
-        </div>
-        <div>
-            <div class="group">
-                <div class="group-head"><h3>Under review</h3><span>2 manuscripts</span></div>
-
-                <article class="pub">
-                    <!-- TODO: replace with the exact manuscript title; add authors and journal when you want them public -->
-                    <h4>Tumor Detection by Image Segmentation Using an Active Contour Model</h4>
-                    <div class="meta"><span class="status review">Under review</span><span>Medical image processing</span></div>
-                    <p class="desc">An active contour (snake) model for segmenting biomedical images, covering boundary detection, parameter tuning and extraction of the tumor region.</p>
-                    <a class="more" href="#project-tumor" data-open="project-tumor">See the related project</a>
-                </article>
-
-                <article class="pub">
-                    <!-- TODO: replace with the exact manuscript title; add authors and journal when you want them public -->
-                    <h4>Edible Soft Robotics for Sustainable Biomedical Applications</h4>
-                    <div class="meta"><span class="status review">Under review</span><span>Soft robotics</span></div>
-                    <p class="desc">A gelatin-based soft robotic system made from edible, biodegradable materials, with pneumatic actuation and self-oscillating motion driven by an acid-base reaction.</p>
-                    <a class="more" href="#project-softrobotics" data-open="project-softrobotics">See the related project</a>
-                </article>
-            </div>
-
-            <div class="group">
-                <div class="group-head"><h3>In preparation</h3><span>1 manuscript</span></div>
-
-                <article class="pub">
-                    <!-- TODO: replace with the exact manuscript title; add authors and target journal when you want them public -->
-                    <h4>Microfluidic Immunoassay for Quantitative Detection of Anti-dsDNA Antibodies in Systemic Lupus Erythematosus (SLE)</h4>
-                    <div class="meta"><span class="status prep">In preparation</span><span>Microfluidics and biosensing</span></div>
-                    <p class="desc">A lab-on-a-chip immunoassay for anti-dsDNA autoantibodies, a key biomarker for SLE, combining microfluidic device design, CFD simulation and computational binding analysis.</p>
-                    <a class="more" href="#project-dsdna" data-open="project-dsdna">See the related project</a>
-                </article>
-
-                <!-- SECOND PAPER IN PREPARATION: fill in and uncomment, then change "1 manuscript" to "2 manuscripts" above
-                <article class="pub">
-                    <h4>Paper title</h4>
-                    <div class="meta"><span class="status prep">In preparation</span><span>Research area</span></div>
-                    <p class="desc">One sentence on what the paper covers.</p>
-                </article>
-                -->
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ============================================================
      RESEARCH: thesis + projects
      ============================================================ -->
-<section class="section tint" id="research">
+<section class="section" id="research">
     <div class="wrap split">
         <div class="rail">
             <h2>Research</h2>
@@ -706,7 +662,7 @@
 
             <!-- PROJECTS -->
             <div class="group" id="projects">
-                <div class="group-head loose"><h3>Projects</h3><span>8 projects</span></div>
+                <div class="group-head loose"><h3>Projects</h3><span>11 projects</span></div>
 
                 <div class="cards">
 
@@ -717,7 +673,7 @@
                             <span class="zoom"><i class="fas fa-expand"></i></span>
                         </button>
                         <div class="card-body">
-                            <div class="label">Research Assistant, MIST <span class="status prep">Paper in preparation</span></div>
+                            <div class="label">Research Assistant, MIST <span class="status prep">Paper in preparation</span> <span class="status patent">Patent filed</span></div>
                             <h4>Microfluidic Immunoassay for Quantitative Detection of Anti-dsDNA Antibodies in Systemic Lupus Erythematosus (SLE)</h4>
                             <p class="brief">Designing and simulating a microfluidic biosensor for detection of anti-dsDNA autoantibodies, a key biomarker for Systemic Lupus Erythematosus (SLE). Implementing computational analysis for therapeutic screening and binding affinity prediction.</p>
                             <ul class="chips"><li class="chip">Microfluidics</li><li class="chip">Biosensor</li><li class="chip">Immunoassay</li><li class="chip">CFD</li><li class="chip">Molecular Docking</li></ul>
@@ -738,36 +694,43 @@
                         </div></div></div>
                     </article>
 
-                    <!-- Rehabilitation exercise tracker.
-                         Cover image images/project8.png is used if present; otherwise the live site is shown. -->
+                    <!-- Rehabilitation exercise tracker (ReMotion AI). Figures are taken from the project report. -->
                     <article class="card project" id="project-rehab" data-card>
-                        <button class="cover" data-zoom aria-label="View image full screen" data-live="https://rehab-exercise-tracker.netlify.app/index.html">
-                            <img src="images/project8.png" alt="AI-powered web-based rehabilitation exercise tracker" />
+                        <button class="cover" data-zoom aria-label="View image full screen">
+                            <img src="images/project8.png" alt="ReMotion AI camera view: tracking skeleton, joint angle, repetition count and form score during shoulder abduction and squat" />
                             <span class="zoom"><i class="fas fa-expand"></i></span>
                         </button>
                         <div class="card-body">
-                            <div class="label">AI &amp; Computer Vision, 2025&ndash;2026</div>
-                            <h4>AI-Powered Web-Based Rehabilitation Exercise Tracker</h4>
-                            <p class="brief">Web-based rehabilitation tracking system using AI for real-time pose, hand and face feedback. Computer vision and MediaPipe algorithms monitor patient exercise form for remote physiotherapy.</p>
-                            <ul class="chips"><li class="chip">MediaPipe</li><li class="chip">Computer Vision</li><li class="chip">JavaScript</li><li class="chip">Telerehabilitation</li></ul>
+                            <div class="label">AI &amp; Computer Vision, 2025&ndash;2026 <span class="status ok">Top 8, AI Business Summit 2026</span> <span class="status patent">Patent filed</span></div>
+                            <h4>ReMotion AI: AI-Powered Web-Based Rehabilitation Exercise Tracker</h4>
+                            <p class="brief">A browser-based physiotherapy assistant that watches home exercise through an ordinary webcam, counts each repetition, grades its form and corrects mistakes by screen and voice. In a pilot it counted repetitions with 94.0% accuracy and responded in 86 ms.</p>
+                            <ul class="chips"><li class="chip">MediaPipe</li><li class="chip">Computer Vision</li><li class="chip">JavaScript</li><li class="chip">Three.js</li><li class="chip">Telerehabilitation</li></ul>
                             <button class="toggle" aria-expanded="false"><span>View details</span> <i class="fas fa-chevron-down"></i></button>
                         </div>
                         <div class="details"><div><div class="details-inner">
-                            <p><strong>Duration:</strong> 2025&ndash;2026</p>
-                            <p><strong>Overview:</strong> Developed a web-based rehabilitation tracking system using AI for real-time pose, hand and face feedback. Implemented computer vision and MediaPipe algorithms to monitor patient exercise form, designed for remote physiotherapy applications to improve patient adherence and outcomes.</p>
+                            <p><strong>Team:</strong> RehabAI, Department of Biomedical Engineering, MIST. Md Maruf Hasan (team leader), Sagor Das, Sanzida Afrin, Fariha Binte Sadique.</p>
+                            <p><strong>Overview:</strong> Almost every rehabilitation patient is given exercises to do at home, where no one checks the movement. ReMotion AI turns a laptop webcam into a guide that checks every repetition, warns before unsafe movement and saves each session so the therapist can follow progress remotely. All video is processed inside the patient's browser, so no camera footage leaves the device.</p>
                             <p><strong>Key highlights</strong></p>
                             <ul>
-                                <li><strong>Real-time pose tracking:</strong> Landmark detection and joint-angle estimation to evaluate exercise posture live in the browser.</li>
-                                <li><strong>Hand &amp; face tracking:</strong> MediaPipe hand and face mesh modules for fine motor and facial rehabilitation exercises.</li>
-                                <li><strong>Automated form feedback:</strong> Instant corrective feedback and repetition counting without any additional hardware.</li>
-                                <li><strong>Browser-based deployment:</strong> Runs entirely on the web with no installation required, accessible from any camera-enabled device.</li>
-                                <li><strong>Remote physiotherapy:</strong> Built to support telerehabilitation, improving patient adherence and therapy outcomes at home.</li>
+                                <li><strong>Body, hand and face tracking:</strong> MediaPipe Pose, Hands and Face Mesh find 33 body, 21 hand or 468 face landmarks in each frame, at about 28 frames per second.</li>
+                                <li><strong>Only correct movement counts:</strong> One state machine per exercise. A repetition counts only after the target angle is reached, held and released; a sustained wrong movement voids it.</li>
+                                <li><strong>Form score and live coaching:</strong> Each repetition is scored from 60 to 100 against clinical range-of-motion targets, with spoken and on-screen corrections in English and Bangla.</li>
+                                <li><strong>24 guided exercises:</strong> Neck, shoulder, elbow, wrist, finger and lower-body movements, each demonstrated by a 3D avatar.</li>
+                                <li><strong>Therapist dashboard:</strong> Prescribe exercises, repetitions, hold times and target angles per patient, watch range of motion live and review progress charts.</li>
+                                <li><strong>Pilot results:</strong> Ten healthy volunteers, eight exercises. Repetition counting accuracy 94.0%, exercise detection accuracy 91.1%, feedback latency 86 ms, System Usability Scale 81.5 out of 100.</li>
+                                <li><strong>Recognition:</strong> Selected among the top 8 projects at the Bangladesh AI Business Summit 2026.</li>
                             </ul>
                             <p><strong>Live demo:</strong> <a href="https://rehab-exercise-tracker.netlify.app/index.html" target="_blank" rel="noopener">rehab-exercise-tracker.netlify.app</a></p>
                             <div class="gallery">
-                                <figure><button data-zoom><img src="images/project8a.png" alt="Real-time pose tracking and joint-angle feedback" loading="lazy" /></button><figcaption>Real-time pose tracking and joint-angle feedback</figcaption></figure>
-                                <figure><button data-zoom><img src="images/project8b.png" alt="Hand landmark tracking module" loading="lazy" /></button><figcaption>Hand landmark tracking module</figcaption></figure>
-                                <figure><button data-zoom><img src="images/project8c.png" alt="Exercise session dashboard" loading="lazy" /></button><figcaption>Exercise session dashboard</figcaption></figure>
+                                <figure><button data-zoom><img src="images/project8a.png" alt="Camera view of shoulder abduction, squat and elbow flexion with tracking skeleton and live feedback" loading="lazy" /></button><figcaption>Camera view with tracking skeleton and live feedback (simulated with the 3D avatar)</figcaption></figure>
+                                <figure><button data-zoom><img src="images/project8b.png" alt="Upper-body exercises demonstrated by the 3D guide avatar" loading="lazy" /></button><figcaption>Upper-body exercises shown by the 3D guide avatar</figcaption></figure>
+                                <figure><button data-zoom><img src="images/project8c.png" alt="Lower-body and neck exercises demonstrated by the 3D guide avatar" loading="lazy" /></button><figcaption>Lower-body and neck exercises shown by the 3D guide avatar</figcaption></figure>
+                                <figure><button data-zoom><img src="images/project8d.png" alt="Home and sign-in page" loading="lazy" /></button><figcaption>Home and sign-in page for patients and therapists</figcaption></figure>
+                                <figure><button data-zoom><img src="images/project8e.png" alt="Therapist dashboard" loading="lazy" /></button><figcaption>Therapist dashboard</figcaption></figure>
+                                <figure><button data-zoom><img src="images/project8f.png" alt="System architecture: patient's browser, cloud backend and therapist's browser" loading="lazy" /></button><figcaption>System architecture: video stays on the patient's device</figcaption></figure>
+                                <figure><button data-zoom><img src="images/project8g.png" alt="Repetition-counting logic" loading="lazy" /></button><figcaption>Repetition-counting logic</figcaption></figure>
+                                <figure><button data-zoom><img src="images/project8h.png" alt="Example progress report with illustrative sample data" loading="lazy" /></button><figcaption>Example progress report (illustrative sample data)</figcaption></figure>
+                                <figure><button data-zoom><img src="images/award-ai-summit.jpg" alt="Presenting ReMotion AI at the Bangladesh AI Business Summit 2026" loading="lazy" /></button><figcaption>Presenting the project at the Bangladesh AI Business Summit 2026</figcaption></figure>
                             </div>
                         </div></div></div>
                     </article>
@@ -779,9 +742,9 @@
                             <span class="zoom"><i class="fas fa-expand"></i></span>
                         </button>
                         <div class="card-body">
-                            <div class="label">Soft Robotics <span class="status review">Paper under review</span></div>
-                            <h4>Edible Soft Robotics</h4>
-                            <p class="brief">Soft robotic system using edible and biodegradable materials for sustainable biomedical applications. Pneumatic actuation with self-oscillating acid-base reactions.</p>
+                            <div class="label">Soft Robotics <span class="status review">Paper submitted</span></div>
+                            <h4>EdiGel: Edible Soft Robotics</h4>
+                            <p class="brief">An edible, biodegradable soft pneumatic actuator cast from gelatin-glycerol composites and driven by gas from an acid-base reaction, aimed at oral drug delivery for patients who struggle to swallow tablets.</p>
                             <ul class="chips"><li class="chip">Gelatin-based</li><li class="chip">Molding &amp; Casting</li><li class="chip">Pneumatic</li></ul>
                             <button class="toggle" aria-expanded="false"><span>View details</span> <i class="fas fa-chevron-down"></i></button>
                         </div>
@@ -793,6 +756,9 @@
                                 <li><strong>Pneumatic actuation:</strong> Soft actuators responding to low-pressure air input.</li>
                                 <li><strong>Self-oscillating system:</strong> Acid-base reaction-driven autonomous motion without external power.</li>
                                 <li><strong>Biomedical applications:</strong> Potential use for patients with paralysis or dysphagia.</li>
+                                <li><strong>Tensile screening:</strong> Five formulations compared; the gelatin-glycerol-agar composite was strongest, at 0.121 MPa and 272% strain.</li>
+                                <li><strong>Degradation:</strong> Specimens in four simulated gastrointestinal media took up 2.7 to 3.1 times their mass within 2 hours and fully disintegrated by 24 hours.</li>
+                                <li><strong>Open challenge:</strong> Gelatin chambers could not yet be sealed against internal pressure, so the bending motion was validated on a silicone copy of the same geometry.</li>
                             </ul>
                             <div class="gallery">
                                 <figure><button data-zoom><img src="images/project1a.png" alt="Chemical reaction and external gas supply system" loading="lazy" /></button><figcaption>Chemical reaction and external gas supply system</figcaption></figure>
@@ -801,6 +767,106 @@
                                 <figure><button data-zoom><img src="images/project1d.png" alt="Iterative mold designs" loading="lazy" /></button><figcaption>Iterative mold designs</figcaption></figure>
                                 <figure><button data-zoom><img src="images/project1e.png" alt="Silicone-based soft robot prototype" loading="lazy" /></button><figcaption>Silicone-based soft robot prototype</figcaption></figure>
                                 <figure><button data-zoom><img src="images/project1f.png" alt="Balloon inflation experiment" loading="lazy" /></button><figcaption>Balloon inflation experiment</figcaption></figure>
+                                <figure><button data-zoom><img src="images/edigel-a.png" alt="Gas-generation assembly feeding the three-chamber actuator" loading="lazy" /></button><figcaption>Gas-generation assembly and three-chamber actuator</figcaption></figure>
+                                <figure><button data-zoom><img src="images/edigel-b.png" alt="Tensile response of the gelatin-based formulations" loading="lazy" /></button><figcaption>Tensile response of the formulations</figcaption></figure>
+                                <figure><button data-zoom><img src="images/edigel-c.png" alt="Cast actuators in variant formulations" loading="lazy" /></button><figcaption>Cast actuators in variant formulations</figcaption></figure>
+                            </div>
+                        </div></div></div>
+                    </article>
+
+                    <!-- Coronary stent graph descriptors -->
+                    <article class="card project" id="project-stent" data-card>
+                        <button class="cover" data-zoom aria-label="View image full screen">
+                            <img src="images/stent.png" alt="Unrolled strut graphs of six coronary stent architectures" />
+                            <span class="zoom"><i class="fas fa-expand"></i></span>
+                        </button>
+                        <div class="card-body">
+                            <div class="label">Computational Biomechanics <span class="status review">Paper submitted</span></div>
+                            <h4>Graph-Based Descriptors of Coronary Stent Architecture</h4>
+                            <p class="brief">Each stent is read from its mesh as a graph of struts and junctions, giving one common space for comparing coil, slotted-tube, open-cell and closed-cell designs and their computed mechanical response.</p>
+                            <ul class="chips"><li class="chip">Graph Representation</li><li class="chip">Beam Model</li><li class="chip">Stent Mechanics</li><li class="chip">Statistics</li></ul>
+                            <button class="toggle" aria-expanded="false"><span>View details</span> <i class="fas fa-chevron-down"></i></button>
+                        </div>
+                        <div class="details"><div><div class="details-inner">
+                            <p><strong>Overview:</strong> Stent families are usually described by their own lists of named dimensions, which cannot be compared with each other. This work sets the parameter list aside and recovers an attributed strut graph directly from the triangle mesh of each device, then runs fourteen designs from nine architectures through one computational framework.</p>
+                            <p><strong>Key highlights</strong></p>
+                            <ul>
+                                <li><strong>Mesh to graph:</strong> A family-agnostic pipeline that returns strut width and wall thickness separately for every member.</li>
+                                <li><strong>Descriptors:</strong> Axial redundancy count, closed-cell index and an articulation detector, read from the number of members crossing each transverse plane. The index reproduces the published classification of all fourteen devices.</li>
+                                <li><strong>Mechanics:</strong> Co-rotational Timoshenko beam model with plastic hinges, tested in radial crimp, bending and axial push, and verified against closed-form solutions.</li>
+                                <li><strong>Findings:</strong> Of 66 descriptor-response pairs, 11 survive Benjamini-Hochberg correction. Cycle rank against collapse pressure gives a Spearman rho of 0.885.</li>
+                                <li><strong>Scope:</strong> Computational and hypothesis-generating; verified but not experimentally validated.</li>
+                            </ul>
+                            <div class="gallery">
+                                <figure><button data-zoom><img src="images/stent-a.png" alt="Junctions, unrolled strut graph and axial cut profile of an open-cell stent" loading="lazy" /></button><figcaption>From mesh to strut graph and axial cut profile</figcaption></figure>
+                                <figure><button data-zoom><img src="images/stent-b.png" alt="Axial cut profiles of nine stent architectures" loading="lazy" /></button><figcaption>Axial cut profiles of nine architectures</figcaption></figure>
+                                <figure><button data-zoom><img src="images/stent-c.png" alt="Mechanical comparison across fourteen devices" loading="lazy" /></button><figcaption>Mechanical comparison across fourteen devices</figcaption></figure>
+                                <figure><button data-zoom><img src="images/stent-d.png" alt="Topology-response relations with Spearman correlation" loading="lazy" /></button><figcaption>Topology-response relations</figcaption></figure>
+                            </div>
+                        </div></div></div>
+                    </article>
+
+                    <!-- Origami scaffold graph surrogate -->
+                    <article class="card project" id="project-scaffold" data-card>
+                        <button class="cover" data-zoom aria-label="View image full screen">
+                            <img src="images/scaffold.png" alt="Origami-inspired super-expandable scaffold shown as a strut graph" />
+                            <span class="zoom"><i class="fas fa-expand"></i></span>
+                        </button>
+                        <div class="card-body">
+                            <div class="label">AI for Scaffold Design <span class="status review">Paper under review</span></div>
+                            <h4>Graph Surrogate Modeling and Inverse Design of Origami-Inspired Bone Scaffolds</h4>
+                            <p class="brief">A graph neural network that predicts the mechanics and fluid transport of super-expandable scaffolds for distraction osteogenesis directly from their geometry, then searches for better designs.</p>
+                            <ul class="chips"><li class="chip">Graph Neural Network</li><li class="chip">Surrogate Model</li><li class="chip">Inverse Design</li><li class="chip">Bone Scaffold</li></ul>
+                            <button class="toggle" aria-expanded="false"><span>View details</span> <i class="fas fa-chevron-down"></i></button>
+                        </div>
+                        <div class="details"><div><div class="details-inner">
+                            <p><strong>Overview:</strong> Existing surrogate models for origami-inspired scaffolds depend on a fixed description of one unit cell. Here scaffolds, whether generated from parameters or rebuilt from print-ready STL files, are represented as graphs of junctions and structural members, so one model reaches assembled and multi-layer designs.</p>
+                            <p><strong>Key highlights</strong></p>
+                            <ul>
+                                <li><strong>Virtual laboratory:</strong> Training data from a co-rotational Timoshenko beam solver and a pore-scale Stokes-flow solver, both analytically verified.</li>
+                                <li><strong>Multi-task network:</strong> Predicts folding rotation, normalized modulus, strain-energy density, permeability and wall shear stress, each with a predictive variance.</li>
+                                <li><strong>Accuracy:</strong> Mean R&sup2; of 0.867 on held-out single-cage designs across 969 designs, and 0.764 on a withheld four-cage, three-layer configuration that parametric models cannot take as input.</li>
+                                <li><strong>Speed:</strong> About 12,000 times faster than direct simulation.</li>
+                                <li><strong>Inverse design:</strong> Pareto search over surrogate-evaluated designs, with selected solutions re-simulated for verification.</li>
+                            </ul>
+                            <div class="gallery">
+                                <figure><button data-zoom><img src="images/scaffold-a.png" alt="Accuracy of the graph surrogate against three parametric baselines" loading="lazy" /></button><figcaption>Graph surrogate against three parametric baselines</figcaption></figure>
+                                <figure><button data-zoom><img src="images/scaffold-b.png" alt="One network evaluated on single cages, assemblies and an unseen configuration" loading="lazy" /></button><figcaption>One network on single cages, assemblies and an unseen configuration</figcaption></figure>
+                                <figure><button data-zoom><img src="images/scaffold-c.png" alt="Pareto fronts for three optimization goals" loading="lazy" /></button><figcaption>Pareto fronts for three optimization goals</figcaption></figure>
+                                <figure><button data-zoom><img src="images/scaffold-d.png" alt="Inverse-designed scaffold assemblies and their simulated compressive response" loading="lazy" /></button><figcaption>Inverse-designed assemblies and compressive response</figcaption></figure>
+                                <figure><button data-zoom><img src="images/scaffold-e.png" alt="Stiffness, recoverability and energy absorption in candidate materials" loading="lazy" /></button><figcaption>Scaffold response in candidate materials</figcaption></figure>
+                            </div>
+                        </div></div></div>
+                    </article>
+
+                    <!-- Hemodialysis: protein-bound uremic toxins -->
+                    <article class="card project" id="project-pbut" data-card>
+                        <button class="cover" data-zoom aria-label="View image full screen">
+                            <img src="images/pbut.png" alt="Multiscale framework from molecular binding to the patient" style="object-fit:contain" />
+                            <span class="zoom"><i class="fas fa-expand"></i></span>
+                        </button>
+                        <div class="card-body">
+                            <div class="label">Modelling &amp; Simulation <span class="status review">Paper under review</span></div>
+                            <h4>Multiscale Modelling of Protein-Bound Uremic Toxin Removal in Hemodialysis</h4>
+                            <p class="brief">A closed-form clearance relation and a multiscale model for toxins that are 90 to 98% bound to albumin and poorly removed by hemodialysis, used to rank treatment and device options for experiment.</p>
+                            <ul class="chips"><li class="chip">Hemodialysis</li><li class="chip">CFD</li><li class="chip">Bayesian Calibration</li><li class="chip">Model Credibility</li></ul>
+                            <button class="toggle" aria-expanded="false"><span>View details</span> <i class="fas fa-chevron-down"></i></button>
+                        </div>
+                        <div class="details"><div><div class="details-inner">
+                            <p><strong>Overview:</strong> Indoxyl sulfate and p-cresyl sulfate are strongly albumin-bound, and no design relation existed for their clearance. This work carries competitive albumin binding through every transport scale, from a single fiber to the dialyzer bundle and the patient.</p>
+                            <p><strong>Key highlights</strong></p>
+                            <ul>
+                                <li><strong>Closed-form relation:</strong> A bound-solute effectiveness-number of transfer units relation that matches the full model to 1.1% on average (3.6% at most) over 108 conditions.</li>
+                                <li><strong>What limits removal:</strong> Clearance depends on dialysate flow and free-toxin conductance, and only weakly on blood flow.</li>
+                                <li><strong>Calibration:</strong> Two binding structures calibrated by Bayesian inference on published group means, then tested on a held-out trial.</li>
+                                <li><strong>Credibility:</strong> Each finding is graded by level of evidence following ASME V&amp;V 40.</li>
+                                <li><strong>Scope:</strong> A computational framework; it predicts toxin concentrations and makes no claim of clinical benefit.</li>
+                            </ul>
+                            <div class="gallery">
+                                <figure><button data-zoom><img src="images/pbut-a.png" alt="Graphical summary: what limits removal and which options to test" loading="lazy" /></button><figcaption>Summary: what limits removal and which options to test</figcaption></figure>
+                                <figure><button data-zoom><img src="images/pbut-b.png" alt="Transport limits and the closed-form relation against the device model" loading="lazy" /></button><figcaption>Transport limits and the closed-form relation</figcaption></figure>
+                                <figure><button data-zoom><img src="images/pbut-c.png" alt="Bench validation and flow maldistribution in the fiber bundle" loading="lazy" /></button><figcaption>Bench validation and flow maldistribution</figcaption></figure>
+                                <figure><button data-zoom><img src="images/pbut-d.png" alt="Weekly benefit of displacer dosing and other options" loading="lazy" /></button><figcaption>Weekly benefit of treatment options</figcaption></figure>
                             </div>
                         </div></div></div>
                     </article>
@@ -838,14 +904,14 @@
                             <span class="zoom"><i class="fas fa-expand"></i></span>
                         </button>
                         <div class="card-body">
-                            <div class="label">Medical Image Processing <span class="status review">Paper under review</span></div>
-                            <h4>Tumor Detection by Image Segmentation</h4>
-                            <p class="brief">Active contour (snake model) for biomedical image segmentation. Boundary detection and region extraction with parameter tuning.</p>
+                            <div class="label">Medical Image Processing <span class="status ok">Paper accepted</span></div>
+                            <h4>Brain Tumor Segmentation and 3D Visualization</h4>
+                            <p class="brief">Chan-Vese active contour segmentation of brain tumors on MRI, comparing multi-point and single seed point initialization, with 3D visualization of the result.</p>
                             <ul class="chips"><li class="chip">MATLAB</li><li class="chip">Image Processing</li><li class="chip">Active Contour</li></ul>
                             <button class="toggle" aria-expanded="false"><span>View details</span> <i class="fas fa-chevron-down"></i></button>
                         </div>
                         <div class="details"><div><div class="details-inner">
-                            <p><strong>Overview:</strong> Active contour (snake model) algorithm for biomedical image segmentation to detect tumor boundaries in medical images.</p>
+                            <p><strong>Overview:</strong> Active contour (snake model) algorithm for biomedical image segmentation to detect tumor boundaries in medical images. The accepted paper studies how the starting contour affects the result, and shows that a single click inside the tumor, expanded by region growing, can replace manual tracing of 3 or 4 points.</p>
                             <p><strong>Key highlights</strong></p>
                             <ul>
                                 <li><strong>Active contour model:</strong> Optimized snake model for tumor boundary detection.</li>
@@ -952,6 +1018,109 @@
                     </article>
 
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     PUBLICATIONS
+     To add a paper: copy one <article class="pub"> block into the
+     right group and update the count in the group heading.
+     When a paper changes status, move its block to the matching group.
+     ============================================================ -->
+<section class="section tint" id="publications">
+    <div class="wrap split">
+        <div class="rail">
+            <h2>Publications</h2>
+            <p>One conference paper accepted, four manuscripts in peer review, two in preparation, and two patents.</p>
+        </div>
+        <div>
+            <div class="group">
+                <div class="group-head"><h3>Accepted</h3><span>1 conference paper</span></div>
+
+                <article class="pub">
+                    <h4>Brain Tumor Segmentation and 3D Visualization Using Active Contour Models: From Multi-Point to Single Seed Point Initialization</h4>
+                    <p class="authors">S. Das, <strong>S. Afrin</strong>, M. T. Islam, M. Moumita, M. Eva</p>
+                    <div class="meta"><span class="status ok">Accepted</span><span>2026 IEEE International Conference on Biomedical Engineering, Computer and Information Technology for Health (BECITHCON)</span></div>
+                    <p class="desc">Compares 3-point, 4-point and single seed point initialization of a Chan-Vese active contour for focal brain lesions on MRI. A region growing step turns one click inside the tumor into a full starting contour, followed by 3D visualization of the segmented tumor.</p>
+                    <a class="more" href="#project-tumor" data-open="project-tumor">See the related project</a>
+                </article>
+            </div>
+
+            <div class="group">
+                <div class="group-head"><h3>Under review: journals</h3><span>2 manuscripts</span></div>
+
+                <article class="pub">
+                    <h4>Geometry-Aware Graph Surrogate Modeling and Inverse Design of Origami-Inspired Super-Expandable Scaffolds Beyond Fixed Parameterizations</h4>
+                    <p class="authors">S. Das, M. T. Islam, <strong>S. Afrin</strong>, M. E. Hoque</p>
+                    <div class="meta"><span class="status review">Under review</span><span>Engineering Applications of Artificial Intelligence (Elsevier), EAAI-26-31381</span></div>
+                    <p class="desc">A graph neural network surrogate that reads bone scaffolds as graphs of junctions and struts, so one model covers parametric, STL-derived and multi-layer designs. Trained on 969 simulated designs and about 12,000 times faster than direct simulation.</p>
+                    <a class="more" href="#project-scaffold" data-open="project-scaffold">See the related project</a>
+                </article>
+
+                <article class="pub">
+                    <h4>A Bound-Solute Effectiveness-Number of Transfer Units Relation and a Credibility-Assessed Multiscale Framework for Protein-Bound Uremic Toxin Removal in Hemodialysis</h4>
+                    <p class="authors">S. Das, T. Islam, <strong>S. Afrin</strong>, F. B. Sadique, M. U. Shafoyat, M. T. Islam, S. R. Haque, M. Hasan, K. Mannoor</p>
+                    <div class="meta"><span class="status review">Under review</span><span>Computer Methods and Programs in Biomedicine (Elsevier), CMPB-D-26-09540</span></div>
+                    <p class="desc">A closed-form relation for the clearance of albumin-bound toxins in hemodialysis, with a multiscale model from albumin binding to the patient. The relation matches the full model to 1.1% on average over 108 conditions.</p>
+                    <a class="more" href="#project-pbut" data-open="project-pbut">See the related project</a>
+                </article>
+            </div>
+
+            <div class="group">
+                <div class="group-head"><h3>Submitted: conference</h3><span>2 papers, ICEEICT 2027</span></div>
+
+                <article class="pub">
+                    <h4>Graph-Based Topological Descriptors of Coronary Stent Architecture and Their Association with Computed Mechanical Response</h4>
+                    <p class="authors">S. Das, M. T. Islam, <strong>S. Afrin</strong>, M. Moumita, M. Eva</p>
+                    <div class="meta"><span class="status review">Submitted</span><span>ICEEICT 2027, Paper ID 1277. Biomedical Engineering track</span></div>
+                    <p class="desc">Represents fourteen coronary stent designs from nine architectures as strut graphs recovered from their meshes, then relates graph descriptors to computed crimp, bending and axial response. Cycle rank tracks collapse pressure with a Spearman rho of 0.885.</p>
+                    <a class="more" href="#project-stent" data-open="project-stent">See the related project</a>
+                </article>
+
+                <article class="pub">
+                    <h4>EdiGel: An Edible, Chemically Actuated Soft Actuator: Material Characterization, Degradation, and Challenges</h4>
+                    <div class="meta"><span class="status review">Submitted</span><span>ICEEICT 2027, Paper ID 1129</span></div>
+                    <p class="desc">An edible gelatin-glycerol soft pneumatic actuator driven by carbon dioxide from a citric acid and sodium bicarbonate reaction, aimed at oral drug delivery. Covers tensile screening of five formulations and degradation in four simulated gastrointestinal media.</p>
+                    <a class="more" href="#project-softrobotics" data-open="project-softrobotics">See the related project</a>
+                </article>
+            </div>
+
+            <div class="group">
+                <div class="group-head"><h3>In preparation</h3><span>2 manuscripts</span></div>
+
+                <article class="pub">
+                    <h4>Microfluidic Immunoassay Device for Quantitative Detection of Anti-dsDNA Antibodies in Systemic Lupus Erythematosus (SLE)</h4>
+                    <div class="meta"><span class="status prep">In preparation</span><span>Microfluidics and biosensing</span></div>
+                    <p class="desc">A lab-on-a-chip immunoassay for anti-dsDNA autoantibodies, a key biomarker for SLE, combining microfluidic device design, CFD simulation and computational binding analysis.</p>
+                    <a class="more" href="#project-dsdna" data-open="project-dsdna">See the related project</a>
+                </article>
+
+                <article class="pub">
+                    <!-- TODO: replace with the exact working title and one line on the detection method -->
+                    <h4>Dengue Detection Kit for Point-of-Care Diagnosis</h4>
+                    <div class="meta"><span class="status prep">In preparation</span><span>Point-of-care diagnostics</span></div>
+                    <p class="desc">Recent work on a low-cost kit for detecting dengue infection at the point of care. The manuscript is being written up.</p>
+                </article>
+            </div>
+
+            <div class="group" id="patents">
+                <div class="group-head"><h3>Patents</h3><span>2 patents</span></div>
+
+                <article class="pub">
+                    <!-- TODO: add the application number and filing date -->
+                    <h4>Microfluidic Immunoassay Device for Detection of Anti-dsDNA Antibodies</h4>
+                    <div class="meta"><span class="status patent">Patent filed</span><span>Microfluidic diagnostic device</span></div>
+                    <a class="more" href="#project-dsdna" data-open="project-dsdna">See the related project</a>
+                </article>
+
+                <article class="pub">
+                    <!-- TODO: add the application number and filing date -->
+                    <h4>ReMotion AI: Webcam-Based Movement Assessment System for Home Rehabilitation</h4>
+                    <div class="meta"><span class="status patent">Patent filed</span><span>AI rehabilitation system</span></div>
+                    <a class="more" href="#project-rehab" data-open="project-rehab">See the related project</a>
+                </article>
             </div>
         </div>
     </div>
@@ -1198,11 +1367,23 @@
         <div class="rail"><h2>Awards</h2></div>
         <div>
             <div class="group">
-                <div class="group-head"><h3>Awards and honors</h3></div>
+                <div class="group-head"><h3>Competitions and awards</h3></div>
                 <div class="rows">
-                    <div class="row">
+                    <div class="row" data-zoomscope>
+                        <div class="when">2026</div>
+                        <div>
+                            <h4>Top 8 Project, Bangladesh AI Business Summit 2026</h4>
+                            <div class="extra">Organized by Dhaka Chamber of Commerce &amp; Industry (DCCI). University student exhibitor with "ReMotion AI", an AI-powered rehabilitation exercise tracker (Team RehabAI, MIST)</div>
+                            <figure class="award-photo"><button data-zoom aria-label="View photo full screen"><img src="images/award-ai-summit.jpg" alt="Presenting the ReMotion AI rehabilitation project to visitors at the Bangladesh AI Business Summit 2026" loading="lazy" /></button><figcaption>Presenting the ReMotion AI rehabilitation project at the Bangladesh AI Business Summit 2026</figcaption></figure>
+                        </div>
+                    </div>
+                    <div class="row" data-zoomscope>
                         <div class="when">2025</div>
-                        <div><h4>Champion, Poster Presentation Competition</h4><div class="extra">MIST. "Andromorphic Robotic Hand" (EMG and remote control)</div></div>
+                        <div>
+                            <h4>Champion, Poster Presentation Competition 2025</h4>
+                            <div class="extra">MIST. "Andromorphic Robotic Hand" (EMG and remote control)</div>
+                            <figure class="award-photo"><button data-zoom aria-label="View photo full screen"><img src="images/award-poster.jpg" alt="Team holding the Champion board at the Poster Presentation Competition 2025" loading="lazy" /></button><figcaption>Champion, Poster Presentation Competition 2025</figcaption></figure>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="when">2022</div>
@@ -1467,7 +1648,7 @@
         document.getElementById('lbNext').style.display = multi ? '' : 'none';
     }
     function open(trigger) {
-        const scope = trigger.closest('[data-card]') || document;
+        const scope = trigger.closest('[data-card], [data-zoomscope]') || document;
         const triggers = [...scope.querySelectorAll('[data-zoom]')].filter(t => t.querySelector('img'));
         items = triggers.map(t => {
             const im = t.querySelector('img');
