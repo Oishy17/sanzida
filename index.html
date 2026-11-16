@@ -109,7 +109,7 @@
             z-index: 0; pointer-events: none;
             background: linear-gradient(165deg, #eef4fa 0%, #dce8f4 40%, #e4edf7 100%);
         }
-        .glass, .card, .card-list, .rows, .pub, .refs, .facts {
+        .glass, .card, .card-list, .rows, .pub, .facts {
             background: var(--glass);
             -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
             border: 1px solid var(--glass-edge);
@@ -335,15 +335,8 @@
         .award-photo figcaption { padding: 8px 12px 10px; font-size: .8rem; line-height: 1.4; color: var(--muted); border-top: 1px solid var(--line); }
 
         /* ===== 10. CONTACT ===== */
-        .contact-grid { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 48px; align-items: start; }
+        .contact-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; align-items: start; }
         .contact-grid .lead { margin-bottom: 18px; max-width: 34ch; }
-        .refs { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0 32px; padding: 4px 24px; border-radius: var(--radius); }
-        .ref { padding: 18px 0; font-size: .9rem; }
-        .ref h4 { font-size: 1rem; font-weight: 700; color: var(--ink); line-height: 1.35; }
-        .ref .post { color: var(--blue); font-weight: 600; }
-        .ref .org { color: var(--muted); }
-        .ref a { overflow-wrap: anywhere; }
-        .ref .links { display: flex; gap: 14px; margin-top: 4px; font-weight: 600; font-size: .85rem; }
         .address { margin-top: 16px; font-size: .88rem; color: var(--muted); }
         .address i { color: var(--blue); margin-right: 6px; }
 
@@ -432,13 +425,11 @@
             .rows { padding: 2px 16px; }
             .row { grid-template-columns: 1fr; gap: 2px; padding: 16px 0; }
             .row.skill { gap: 10px; }
-            .refs { padding: 4px 16px; }
             .card-list li { grid-template-columns: 88px minmax(0, 1fr); padding: 12px 14px; }
             .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
             .gallery img { height: 120px; }
             .toggle { padding: 6px 0; }
-            .pub .more, .web .visit, .ref a, .card-list a { display: inline-block; padding: 5px 0; }
-            .ref .links { margin-top: 0; }
+            .pub .more, .web .visit, .card-list a { display: inline-block; padding: 5px 0; }
             .lightbox { padding: 64px 10px 72px; }
             .lb-prev, .lb-next { top: auto; bottom: 14px; transform: none; }
             .lb-prev { left: calc(50% - 56px); }
@@ -1432,7 +1423,7 @@
 </section>
 
 <!-- ============================================================
-     CONTACT + REFERENCES
+     CONTACT
      ============================================================ -->
 <section class="section" id="contact">
     <div class="wrap split">
@@ -1445,30 +1436,6 @@
                     <li><span class="k">GitHub</span><span class="v"><a href="https://github.com/Oishy17" target="_blank" rel="noopener">github.com/Oishy17</a></span></li>
                     <li><span class="k">LinkedIn</span><span class="v"><a href="https://www.linkedin.com/in/sanzida-afrin-4a0861250/" target="_blank" rel="noopener">Sanzida Afrin</a></span></li>
                 </ul>
-            </div>
-            <div>
-                <div class="group-head"><h3>Academic references</h3><span>Department of Biomedical Engineering, MIST</span></div>
-                <div class="refs">
-                    <div class="ref">
-                        <h4>Lt Col Md. Maruf Hasan, PhD</h4>
-                        <div class="post">Instructor Class-A</div>
-                        <a href="mailto:maruf.hasan@bme.mist.ac.bd">maruf.hasan@bme.mist.ac.bd</a>
-                    </div>
-                    <div class="ref">
-                        <h4>Dr. Md. Kaiissar Mannoor</h4>
-                        <div class="post">Professor</div>
-                        <a href="mailto:kaiissar.mannoor@bme.mist.ac.bd">kaiissar.mannoor@bme.mist.ac.bd</a>
-                    </div>
-                    <div class="ref">
-                        <h4>Dr. Md. Tobibul Islam</h4>
-                        <div class="post">Assistant Professor</div>
-                        <a href="mailto:tobibul.islam@bme.mist.ac.bd">tobibul.islam@bme.mist.ac.bd</a>
-                        <div class="links">
-                            <a href="https://scholar.google.com/citations?user=LR3eyiwAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
-                            <a href="https://www.researchgate.net/profile/Md-Islam-1475/research" target="_blank" rel="noopener">ResearchGate</a>
-                        </div>
-                    </div>
-                </div>
                 <p class="address"><i class="fas fa-location-dot"></i>3rd Floor, Tower-4, MIST, Mirpur Cantonment, Dhaka-1216, Bangladesh</p>
             </div>
         </div>
